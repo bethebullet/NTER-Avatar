@@ -13,7 +13,7 @@ public class PlaceOnTrackedImage : MonoBehaviour
 
 	// List of prefabs to instantiate - these should be named the same
 	// as their corresponding 2D images in the reference image library 
-	public GameObject[] ArPrefabs;
+	public GameObject[] ARPrefabs;
 
 	// Keep dictionary array of created prefabs
 	private readonly Dictionary<string, GameObject> _instantiatedPrefabs = new Dictionary<string, GameObject>();
@@ -46,7 +46,7 @@ public class PlaceOnTrackedImage : MonoBehaviour
 			// Get the name of the reference image
 			var imageName = trackedImage.referenceImage.name;
 			// Now loop over the array of prefabs
-			foreach (var curPrefab in ArPrefabs)
+			foreach (var curPrefab in ARPrefabs)
 			{
 				// Check whether this prefab matches the tracked image name, and that
 				// the prefab hasn't already been created
@@ -73,11 +73,11 @@ public class PlaceOnTrackedImage : MonoBehaviour
 		foreach (var trackedImage in eventArgs.removed)
 		{
 			// Destroy its prefab
-			Destroy(_instantiatedPrefabs[trackedImage.referenceImage.name]);
+			//Destroy(_instantiatedPrefabs[trackedImage.referenceImage.name]);
 			// Also remove the instance from our array
-			_instantiatedPrefabs.Remove(trackedImage.referenceImage.name);
+			//_instantiatedPrefabs.Remove(trackedImage.referenceImage.name);
 			// Or, simply set the prefab instance to inactive
-			//_instantiatedPrefabs[trackedImage.referenceImage.name].SetActive(false);
+			_instantiatedPrefabs[trackedImage.referenceImage.name].SetActive(false);
 		}
 	}
 }
