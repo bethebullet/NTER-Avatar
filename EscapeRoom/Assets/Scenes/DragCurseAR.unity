@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -348,6 +348,7 @@ MonoBehaviour:
   ARPrefabs:
   - {fileID: 3403064423129585422, guid: 44a9419e42bdd16488fc7e42e54f37f3, type: 3}
   - {fileID: 3991531845004414147, guid: 4e42a9988da731a49a023b37c810eda0, type: 3}
+  - {fileID: 3099842634336605279, guid: ffb96948eae9ccf4eb531e3969256a1d, type: 3}
 --- !u!114 &388525033
 MonoBehaviour:
   m_ObjectHideFlags: 0
