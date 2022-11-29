@@ -31,9 +31,9 @@ MonoBehaviour:
       m_GuidLow: 4928047451101006040
       m_GuidHigh: 5509960910865451400
     m_SerializedTextureGuid:
-      m_GuidLow: 2951071444310309920
-      m_GuidHigh: 2014802231198826984
-    m_Size: {x: 0, y: 0}
-    m_SpecifySize: 0
+      m_GuidLow: 12782565781195559665
+      m_GuidHigh: 12972255513309919659
+    m_Size: {x: 0.1, y: 0.13959184}
+    m_SpecifySize: 1
     m_Name: NumberSquare
     m_Texture: {fileID: 0}
