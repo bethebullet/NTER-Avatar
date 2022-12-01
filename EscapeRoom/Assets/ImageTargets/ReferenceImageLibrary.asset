@@ -21,9 +21,9 @@ MonoBehaviour:
       m_GuidLow: 4982270709385344319
       m_GuidHigh: 10278511322433963705
     m_SerializedTextureGuid:
-      m_GuidLow: 7981561264270958994
-      m_GuidHigh: 8574089738939408504
-    m_Size: {x: 0.1, y: 0.15027323}
+      m_GuidLow: 16146798005297850624
+      m_GuidHigh: 14708309339008630282
+    m_Size: {x: 0.1, y: 0.1390511}
     m_SpecifySize: 1
     m_Name: KingOfHearts
     m_Texture: {fileID: 0}
