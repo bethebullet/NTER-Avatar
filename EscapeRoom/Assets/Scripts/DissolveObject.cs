@@ -8,12 +8,13 @@ public class DissolveObject : MonoBehaviour
     MeshRenderer rend;
     //Material disMaterial = (Material)Resources.Load("Dissolve Material", typeof(Material));
 
+    //local variables corresponding to shader variables
     int dissolving; //if false(0), stop animation and stay solid, true(1), let animation play
     float dissolved; //the state at which the object is dissolved, 0 - full, 1 - empty
 
-    public float inRate;
-    public float outRate;
-    public float fadeTime;
+    public float inRate; // rate at which object undissolves
+    public float outRate; // rate at which object dissolves
+    public float fadeTime; // time between dissolving change, dissolve speed, lower is faster
     
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,7 @@ public class DissolveObject : MonoBehaviour
     //when enabled, play undissolve animation
     void OnEnable()
     {
-        dissolved = 1.0f;
+        dissolved = 1.0f; //fully dissolved before fading in animation
         StartCoroutine(FadeIn());
     }
 
@@ -52,16 +53,17 @@ public class DissolveObject : MonoBehaviour
     }
     */
 
-    //undissolve animator call
+    //undissolve animation call
     IEnumerator FadeIn()
     {
-        while(dissolved > 0)
+        while(dissolved > 0) // while object dissolved at all
         {
-            dissolved -= inRate;
-            yield return new WaitForSeconds(fadeTime);
+            dissolved -= inRate; //change dissolved (alpha) by inRate
+            yield return new WaitForSeconds(fadeTime); //wait fadeTime seconds between changes
         }
     }
 
+    //dissolve animation call
     IEnumerator FadeOut()
     {
         while(dissolved < 1)
