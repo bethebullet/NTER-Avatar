@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html{
+                width: 100vw;
+                height: 100vh;
+            }
+            body{
+                background-color: rgba(0, 255, 0, 0.2);
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+            }
+            .heading{
+                text-align:center;
+                font-size:5em;
+                
+            }
+            .options{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 5;
+                width: 100%;
+                height: 100%;
+            }
+            .option{
+                background-color: rgb(8, 66, 8);
+                min-width: 400px;
+                width: 70vw;
+                min-height: 100px;
+                height: 120px;
+                color: white;
+                margin: 40px auto;
+                font-size: 3em;
+                border-radius: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .option:hover, .back-btn:hover{
+                cursor: pointer;
+            }
+            img{
+                width: 200%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                backdrop-filter: blur(20px);
+                box-shadow: 1px 2px 15px green, inside;
+            }
+            .page{
+                width: 100%;
+                height: 100%;
+                background-color: rgb(121, 207, 121);
+                position: absolute;
+                display: none;
+            }
+            .page p{
+                font-size: 10em;
+                text-align: center;
+            }
+            .menu-page{
+                background-image: url("https://localist-images.azureedge.net/photos/38563650740585/card/e0047e96fa4e4ee4d817e25268cf0e092e86992f.jpg");
+                background-color: transparent;
+            }
+            .active{
+                display: block;
+            }
+            .back-btn{
+                z-index: 5;
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+                text-align: center;
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                background-color: rgb(8, 66, 8);
+            }
+            /*Responsive*/
+            @media (min-width: 900px){
+                .option{
+                    min-height: 20px;
+                    height: 50px;
+                    width: 150px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="back-btn" onclick="GoBack()">Back</div>
+        <main class="menu-page page active">
+            <h1 class="heading">Sample Title</h1>
+            <div class="options">
+                <div class="option 1" data-id="1">Option 1</div>
+                <div class="option 2" data-id="2">Option 2</div>
+                <div class="option 3" data-id="3">Option 3</div>
+                <div class="option 4" data-id="4">Option 4</div>
+            </div>
+            <img src="https://localist-images.azureedge.net/photos/38563650740585/card/e0047e96fa4e4ee4d817e25268cf0e092e86992f.jpg" alt="Discovery Park UNT">
+        </main>
+        <section class="page" id="1"><p>Page 1</p></section>
+        <section class="page" id="2"><p>Page 2</p></section>
+        <section class="page" id="3"><p>Page 3</p></section>
+        <section class="page" id="4"><p>Page 4</p></section>
+        
+        <script>
+            let pages = document.querySelectorAll('.page');
+            const mmenu = document.querySelector('.menu-page')
+            let btns = document.querySelectorAll('.option')
+            let nav = document.querySelector('.options')
+            function ChangePage(){
+                for(let i = 0; i < pages.length; i++){
+                    if(pages[i].classList[pages.classList.length] != 'active'){
+                        pages[i].classList.add('active')
+                    }
+                }
+            }
+            function GoBack(){
+                for(let i = 0; i < pages.length; i++){
+                    if(pages[i].classList[pages[i].classList.length - 1] == 'active'){
+                        pages[i].classList.remove('active')
+                    }
+                }
+                mmenu.classList.add('active')
+                nav.style.display = 'block'
+                nav.style.display = 'flex'
+            }
+            for(let i = 0; i < btns.length; i++){
+                btns[i].addEventListener('click', function(){
+                    for(let j = 0; j < pages.length; j++){
+                        if(btns[i].classList[1] == pages[j].id){
+                            pages[j].classList.add('active')
+                            nav.style.display = 'none'
+                        }
+                    }
+                    nav.style.display = 'none'
+                    mmenu.classList.remove('active')
+                })
+            }
+
+        </script>
+        
+
+    </body>
+</html>
