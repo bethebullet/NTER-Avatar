@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028513, g: 0.22571547, b: 0.30692387, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658065, g: 0.49641448, b: 0.574818, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -487,6 +487,8 @@ Transform:
   - {fileID: 1125370808}
   - {fileID: 1697560882}
   - {fileID: 1792092717}
+  - {fileID: 950111125}
+  - {fileID: 1779661638}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2336,7 +2338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4e6a1e2cffbe04141b0c80b1ae3777c4, type: 2}
+  - {fileID: 2100000, guid: 73493426c36a7e244bedbe258f7a4be3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4560,6 +4562,37 @@ Transform:
   m_Father: {fileID: 1280965778}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &950111124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 950111125}
+  m_Layer: 0
+  m_Name: Stair_1.14
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &950111125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950111124}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 61.58, y: 0, z: -30.63}
+  m_LocalScale: {x: 0.14665, y: 1, z: 1.2606498}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 141694730}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &952250235
 GameObject:
   m_ObjectHideFlags: 0
@@ -6023,7 +6056,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.6019641e-19, y: 1.7748036e+28, z: 6.886907e+22, w: 4.4138494e+21}
+  m_BoundingSphereOverride: {x: 1.6019641e-19, y: 1.7748036e+28, z: 6.886907e+22,
+    w: 4.4138494e+21}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -9126,6 +9160,37 @@ Transform:
   m_Father: {fileID: 1991432374}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1779661637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1779661638}
+  m_Layer: 0
+  m_Name: Stair_1.13
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1779661638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779661637}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 61.95, y: 0, z: -71.44}
+  m_LocalScale: {x: 0.14665, y: 1, z: 1.2606498}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 141694730}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1787110009
 GameObject:
   m_ObjectHideFlags: 0
@@ -9666,7 +9731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SerializedLibrary: {fileID: 11400000, guid: 108b91b5fd9562f49af4eec1317be8e5, type: 2}
+  m_SerializedLibrary: {fileID: 11400000, guid: 108b91b5fd9562f49af4eec1317be8e5,
+    type: 2}
   m_MaxNumberOfMovingImages: 1
   m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &1829571711
