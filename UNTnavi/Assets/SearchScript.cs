@@ -13,6 +13,7 @@ public class SearchScript : MonoBehaviour
     RoomList lists;
     [SerializeField] private Transform m_ContentContainer;
     [SerializeField] private GameObject m_ItemPrefab;
+    [SerializeField] private  Pathmaker player;
 
     void Start()
     {
