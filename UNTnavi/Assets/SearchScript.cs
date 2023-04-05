@@ -16,13 +16,19 @@ public class SearchScript : MonoBehaviour
 
     void Start()
     {
+        lists = null;
+    }
+
+    public void InitializeSearch(RoomList x)
+    {
 
         //if maps.GetComponent<RoomList>() is null or < .count == 349, dont do anything
-        if (maps.GetComponent<RoomList>() == null)
-            return;
+        // if (maps.GetComponentInChildren<RoomList>() == null)
+        //     return;
 
-        lists = maps.GetComponent<RoomList>();
+        // lists = maps.GetComponentInChildren<RoomList>();
 
+        lists = x;
         //initialize the total number of elements to the number of doors from RoomList.cs
         totalElements = lists.doors.Count;
 
@@ -52,14 +58,14 @@ public class SearchScript : MonoBehaviour
     void Update()
     {
         //if maps.GetComponent<RoomList>() is null, dont do anything
-        if (maps.GetComponent<RoomList>() == null)
+        if (lists == null)
             return;
 
         //if Element is full, dont do anything
         if (Element.Count == totalElements)
             return;
             
-        lists = maps.GetComponent<RoomList>();
+        //lists = maps.GetComponent<RoomList>();
 
         //initialize the total number of elements to the number of doors from RoomList.cs
         totalElements = lists.doors.Count;

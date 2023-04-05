@@ -31,6 +31,6 @@ public class DebugGPS : MonoBehaviour
         currentLocation = _locationProvider.CurrentLocation.LatitudeLongitude;
         location.text = "CL: " + currentLocation.x + ", " + currentLocation.y;
 
-        distance.text = "Distance: " + dd.dist;
+        distance.text = "Distance: " + dd.dist + " meters";
     }
 }

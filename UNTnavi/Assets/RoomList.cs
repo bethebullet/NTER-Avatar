@@ -14,7 +14,7 @@ public class RoomList : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         searchTag = "Door";
         if(searchTag != null)
@@ -30,7 +30,8 @@ public class RoomList : MonoBehaviour
         if(searchTag != null)
             FindObjectwithTag(searchTag);
         elevators = new List<GameObject>(actors);
-        
+
+        GameObject.FindGameObjectWithTag("UI").GetComponent<SearchScript>().InitializeSearch(this);
     }
 
     public void FindObjectwithTag(string tag)
