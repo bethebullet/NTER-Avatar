@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UI_Script : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class UI_Script : MonoBehaviour
     public void update(int state)
     {
         screenState = state;
-        
+
         if (screenState == 0)
         {
             mainMenuObj.SetActive(true);
