@@ -17,7 +17,7 @@ public class DetectDistance : MonoBehaviour
         var mapPos = new GeoCoordinatePortable.GeoCoordinate(33.253689744936516f,  -97.15234794376056f);
 
         dist = playerPos.GetDistanceTo(mapPos); //meters
-        Debug.Log(dist);
+        // Debug.Log(dist);
 
         if(dist > 400)
         {

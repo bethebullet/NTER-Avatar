@@ -43,6 +43,8 @@ public class SearchScript : MonoBehaviour
         {
             //using the prefab, create a new object inside of SearchContent
             var item_go = Instantiate(m_ItemPrefab);
+            item_go.GetComponent<OnClickScript>().pm = player;
+            item_go.GetComponent<OnClickScript>().room = Element[i];
             //set the text of the object to the name of the door
             item_go.GetComponentInChildren<TextMeshProUGUI>().text = Element[i].name;
             item_go.GetComponent<RectTransform>().sizeDelta = new Vector2(307.9071f, 58.1125f);

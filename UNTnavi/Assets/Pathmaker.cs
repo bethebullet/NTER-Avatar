@@ -5,10 +5,15 @@ using Pathfinding;
 
 public class Pathmaker : MonoBehaviour
 {
-    Path path;
-    Seeker seeker;
+    public Path path;
+    public Seeker seeker;
+    
+    public Navi navi;
 
-    int currentWP;
+    public int currentWP;
+    public float distWP;
+    public float totalDist;
+    public float distLeft;
 
     public Vector3 myLocation;
     public Vector3 target;
@@ -21,18 +26,34 @@ public class Pathmaker : MonoBehaviour
         target = myLocation;
         currentWP = 0;
         UpdatePath();
+        navi.InitializeNavi(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distWP = Vector3.Distance(myLocation, path.vectorPath[currentWP]);
+        if(path == null)
+            return;
+        distWP = Vector3.Distance(myLocation, path.vectorPath[currentWP]);
         if (distWP < .75f && currentWP < path.vectorPath.Count)
             currentWP++;
+        
+        float sum = 0;
+        for (int i = 0; i < path.vectorPath.Count - 1; i++)
+        {
+            sum += Vector3.Distance(path.vectorPath[i], path.vectorPath[i + 1]);
+        }
+        totalDist = sum;
 
-        Debug.Log(distWP);
-        Debug.Log(path.vectorPath.Count);
-        Debug.Log(currentWP);
+        float sumL = 0;
+        for (int i = 0; i < currentWP - 1; i++)
+        {
+            sumL += Vector3.Distance(path.vectorPath[i], path.vectorPath[i + 1]);
+        }
+        distLeft = sum - sumL;
+        // Debug.Log(distWP);
+        // Debug.Log(path.vectorPath.Count);
+        // Debug.Log(currentWP);
 
 
     }
