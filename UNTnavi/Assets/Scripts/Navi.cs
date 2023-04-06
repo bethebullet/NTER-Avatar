@@ -5,6 +5,7 @@ using UnityEngine;
 public class Navi : MonoBehaviour
 {
     Pathmaker pm;
+    TrailRenderer tr;
 
     public float travelDist;
     float distSum;
@@ -20,6 +21,7 @@ public class Navi : MonoBehaviour
     void Awake()
     {
         pm = null;
+        tr = GetComponentInChildren<TrailRenderer>();
     }
 
     // Start is called before the first frame update
@@ -28,8 +30,8 @@ public class Navi : MonoBehaviour
         pm = pathmaker;
         travelDist = 5;
         moving = false;
-        travelDist = 10;
-        speed = 3;
+        travelDist = 15;
+        speed = .3f;
     }
 
     // Update is called once per frame
@@ -57,12 +59,12 @@ public class Navi : MonoBehaviour
             distSum += Vector3.Distance(pm.path.vectorPath[i], pm.path.vectorPath[i + 1]);
             if(distSum > travelDist/2 && !pastMid)
             {
-                middle = pm.path.vectorPath[i];
+                middle = pm.path.vectorPath[i] + new Vector3 (0,1,0);
                 pastMid = true;
             }
             if(distSum > travelDist)
             {
-                target = pm.path.vectorPath[i];
+                target = pm.path.vectorPath[i] + new Vector3 (0,1,0);
                 i = pm.path.vectorPath.Count;
             } 
 
@@ -75,25 +77,52 @@ public class Navi : MonoBehaviour
 
     IEnumerator MoveNavi()
     {
-        Debug.Log("MOVING!");
+        // Debug.Log("MOVING!");
         moving = true;
+        
 
-        transform.position = pm.myLocation;
+        // transform.position = pm.transform.position;
+        var startPos = pm.transform.position;
+        transform.position = startPos;
+        //yield return new WaitForEndOfFrame();
+        tr.Clear();
+        tr.emitting = true;
+
+        // Debug.Log(transform.position);
+        float timer = 0;
         marker = 0;
 
-        while(Vector3.Distance(transform.position, target) > 2)
-        {
-            if(Vector3.Distance(transform.position, middle) < 1)
-                marker++;
-            if (marker == 0)
-            {
-                transform.position = Vector3.Lerp(transform.position, middle, Time.deltaTime * speed);
-            } else
-            {
-                transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * speed);
-            }
+        int i = 0;
+        while(Vector3.Distance(transform.position, middle) > .1f && i < 100)
+        {   
+            if(speed <= 0 )
+                speed = .01f;
+
+            transform.position = Vector3.Lerp(startPos, middle, timer / speed);
+            
+            timer += Time.deltaTime;
+            i++;
+            yield return new WaitForSeconds(.01f);
+            Debug.Log(Vector3.Distance(transform.position, middle));
         }
+        // Debug.Log("Middle");
+        i = 0;
+        timer = 0;
+        while(Vector3.Distance(transform.position, target) > .1f && i < 100)
+        {
+            if(speed <= 0 )
+                speed = .01f;
+            
+            transform.position = Vector3.Lerp(middle, target, timer / speed);
+
+            timer += Time.deltaTime;
+            i++;
+            yield return new WaitForSeconds(.01f);
+        }
+        
         yield return new WaitForSeconds(.5f);
+        tr.emitting = false;
+        //yield return new WaitForEndOfFrame();
         moving = false;
     }
 }
