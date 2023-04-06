@@ -9,6 +9,9 @@ TagManager:
   - BathroomM
   - BathroomF
   - Elevator
+  - Stairs
+  - Pathfinder
+  - UI
   layers:
   - Default
   - TransparentFX
