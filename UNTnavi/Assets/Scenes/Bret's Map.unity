@@ -6858,7 +6858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1957152295}
-  - component: {fileID: 1957152294}
+  - component: {fileID: 1957152296}
   m_Layer: 0
   m_Name: Compass Manager
   m_TagString: Untagged
@@ -6866,23 +6866,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1957152294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957152293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdf9830eae783004894d5681e0deb977, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arRaycastManager: {fileID: 1567940298}
-  arPlaneManager: {fileID: 1567940297}
-  rocketPrefab: {fileID: 8972966093632199504, guid: 7321534d5f0cdc04aa6202c7a7920a49,
-    type: 3}
-  resetButton: {fileID: 0}
 --- !u!4 &1957152295
 Transform:
   m_ObjectHideFlags: 0
@@ -6898,6 +6881,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1957152296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957152293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf9830eae783004894d5681e0deb977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arRaycastManager: {fileID: 1567940298}
+  arPlaneManager: {fileID: 1567940297}
+  rocketPrefab: {fileID: 8972966093632199504, guid: 7321534d5f0cdc04aa6202c7a7920a49,
+    type: 3}
 --- !u!1 &1960702047
 GameObject:
   m_ObjectHideFlags: 0

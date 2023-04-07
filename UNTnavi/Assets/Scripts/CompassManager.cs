@@ -11,37 +11,18 @@ public class CompassManager : MonoBehaviour
     public ARRaycastManager arRaycastManager;
     public ARPlaneManager arPlaneManager;
     public GameObject rocketPrefab;
-    public Button resetButton;
 
     private bool rocketCreated = false;
     private GameObject instantiatedRocket;
 
     private List<ARRaycastHit> arRaycastHits = new List<ARRaycastHit>();
-
-    private void Awake()
-    {
-        resetButton.onClick.RemoveAllListeners();
-        resetButton.onClick.AddListener(() =>
-        {
-            DeleteRocket(instantiatedRocket);
-        });
-    }
     
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            var touch = Input.GetTouch(0);
-            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-            {
-                if (touch.phase == TouchPhase.Ended)
-                {
-                    if (Input.touchCount == 1)
-                    {
-                        if (!rocketCreated)
+          if (!rocketCreated)
                         {
                             //Rraycast Planes
-                            if (arRaycastManager.Raycast(touch.position, arRaycastHits))
+                            if (arRaycastManager.Raycast(Camera.main.transform.position, arRaycastHits))
                             {
                                 var pose = arRaycastHits[0].pose;
                                 //CreateRocket(pose.position);
@@ -52,17 +33,12 @@ public class CompassManager : MonoBehaviour
                                 return;
                             }
                         }
-                    }
-                }
-            }
-        }
     }
     
     private void CreateRocket(Vector3 position)
     {
         instantiatedRocket = Instantiate(rocketPrefab, position, Quaternion.identity);
         rocketCreated = true;
-        resetButton.gameObject.SetActive(true);
     }
 
     private void TogglePlaneDetection(bool state)
@@ -78,7 +54,6 @@ public class CompassManager : MonoBehaviour
     public void DeleteRocket(GameObject cubeObject)
     {
         Destroy(cubeObject);
-        resetButton.gameObject.SetActive(false);
         rocketCreated = false;
         TogglePlaneDetection(true);
     }

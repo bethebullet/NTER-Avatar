@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ARNavigator.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Brandon Map.unity
     guid: d11afef2b0d0e9f439d3f5580489e7a5
+  - enabled: 1
+    path: Assets/Scenes/Bret's Map.unity
+    guid: 3348d29b22654b34bbd82b31b2949853
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}
