@@ -13,7 +13,7 @@ public class CompassManager : MonoBehaviour
     public GameObject rocketPrefab;
 
     private bool rocketCreated = false;
-    private GameObject instantiatedRocket;
+    public GameObject instantiatedRocket;
 
     private List<ARRaycastHit> arRaycastHits = new List<ARRaycastHit>();
     
