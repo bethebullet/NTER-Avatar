@@ -9,6 +9,7 @@ public class UI_Script : MonoBehaviour
     public GameObject splashscreen;
     public GameObject mainMenuObj;
     public GameObject roomSearchObj;
+    public GameObject scheduleObj;
 
     public Toggle tog;
     public int screenState = 0;
@@ -24,6 +25,7 @@ public class UI_Script : MonoBehaviour
         splashscreen.SetActive(true);
         mainMenuObj.SetActive(true);
         roomSearchObj.SetActive(false);
+        scheduleObj.SetActive(false);
 
         StartCoroutine(SplashFade());
     }
@@ -48,11 +50,19 @@ public class UI_Script : MonoBehaviour
         {
             mainMenuObj.SetActive(true);
             roomSearchObj.SetActive(false);
+            scheduleObj.SetActive(false);
         }
         else if (screenState == 1)
         {
             mainMenuObj.SetActive(false);
             roomSearchObj.SetActive(true);
+            scheduleObj.SetActive(false);
+        }
+        else if (screenState == 2)
+        {
+            mainMenuObj.SetActive(false);
+            roomSearchObj.SetActive(false);
+            scheduleObj.SetActive(true);
         }
     }
 
