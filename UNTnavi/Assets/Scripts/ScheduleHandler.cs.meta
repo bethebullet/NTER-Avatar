@@ -3,7 +3,10 @@ guid: 7d1a2851e787d6349bcb1de61e0b3356
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - scheduleTemplate: {fileID: 7913667289743311983, guid: adc0737ac8d8c164d8292262e8d1d070,
+      type: 3}
+  - TemplateContainer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
