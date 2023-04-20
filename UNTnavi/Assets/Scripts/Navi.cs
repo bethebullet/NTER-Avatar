@@ -6,6 +6,7 @@ public class Navi : MonoBehaviour
 {
     Pathmaker pm;
     TrailRenderer tr;
+    public UI_Script ui;
 
     public float travelDist;
     float distSum;
@@ -72,6 +73,12 @@ public class Navi : MonoBehaviour
 
         if (!moving)
             StartCoroutine(MoveNavi());
+
+        if(ui.mapCam.enabled)
+            tr.widthMultiplier = 7;
+        else
+            tr.widthMultiplier = 1;
+        
 
     }
 

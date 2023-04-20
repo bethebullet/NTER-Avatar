@@ -30,6 +30,11 @@ public class CompassBehaviour : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, northRotation);
             headingText.text = ((int)northRotation).ToString() + "° " + DegreesToCardinalDetailed(northRotation);
         }
+
+        if(northRotation > 359.9999f)
+            northRotation = 0;
+        if(northRotation < 0f)
+            northRotation = 359.9999f;
     }
 
     IEnumerator InitializeCompass()
