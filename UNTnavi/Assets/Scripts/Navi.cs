@@ -38,7 +38,7 @@ public class Navi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pm == null || pm.path == null)
+        if(pm == null || pm.path == null || pm.path.vectorPath.Count < pm.currentWP || pm.currentWP < 0)
             return;
 
         // middle = pm.path.vectorPath[pm.currentWP];
@@ -75,7 +75,7 @@ public class Navi : MonoBehaviour
             StartCoroutine(MoveNavi());
 
         if(ui.mapCam.enabled)
-            tr.widthMultiplier = 7;
+            tr.widthMultiplier = 2;
         else
             tr.widthMultiplier = 1;
         

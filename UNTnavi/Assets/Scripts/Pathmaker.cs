@@ -23,7 +23,7 @@ public class Pathmaker : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         myLocation = transform.position;
-        target = myLocation;
+        target = myLocation + new Vector3(0,5,0);
         currentWP = 0;
         UpdatePath();
         navi.InitializeNavi(this);
