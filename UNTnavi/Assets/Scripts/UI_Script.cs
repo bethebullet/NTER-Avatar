@@ -10,12 +10,20 @@ public class UI_Script : MonoBehaviour
     public GameObject mainMenuObj;
     public GameObject roomSearchObj;
     public GameObject scheduleObj;
+    public GameObject scavMenu;
+    public Image scavButton;
+    public Color white => Color.white;
+    public Color green => Color.green;
 
     public Toggle tog;
     public int screenState = 0;
+    public bool scavengerHunt = false;
+    private int scavState;
 
     public Camera ARcam;
     public Camera mapCam;
+
+    public bool blink;
 
     void Start()
     {
@@ -26,6 +34,7 @@ public class UI_Script : MonoBehaviour
         mainMenuObj.SetActive(true);
         roomSearchObj.SetActive(false);
         scheduleObj.SetActive(false);
+        scavState = 0; //remove this later when player prefs are added
 
         StartCoroutine(SplashFade());
     }
@@ -39,6 +48,10 @@ public class UI_Script : MonoBehaviour
         } else {
             mapCam.enabled = true;
             ARcam.enabled = false;
+        }
+        if (blink)
+        {
+            scavButton.color = Lerp(white, green, 2);
         }
     }
 
@@ -66,6 +79,26 @@ public class UI_Script : MonoBehaviour
         }
     }
 
+    public void scav()
+    {
+        if (scavengerHunt)
+        {
+            scavMenu.SetActive(false);
+            scavengerHunt = false;
+        }
+        else
+        {
+            scavMenu.SetActive(true);
+            scavMenu.GetComponent<scavUI>().updateMenu(scavState);
+            blink = false;
+            scavengerHunt = true;
+        }
+    }
+    public void setScavMenu(int state)
+    {
+        scavState = state;
+    }    
+
     IEnumerator SplashFade()
     {
         yield return new WaitForSeconds(.5f);
@@ -78,4 +111,10 @@ public class UI_Script : MonoBehaviour
         color.alpha = 0;
         splashscreen.SetActive(false);
     }
+    public void blinkEffect()
+    {
+        blink = true;
+    }
+
+    public Color Lerp(Color firstColor, Color secondColor, float speed) => Color.Lerp(firstColor, secondColor, Mathf.Sin(Time.time * speed));
 }

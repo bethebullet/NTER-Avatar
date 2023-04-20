@@ -10,10 +10,12 @@ public class DetectDistance : MonoBehaviour
 
     public double dist;
 
+    public GeoCoordinatePortable.GeoCoordinate playerPos;
+
     // Update is called once per frame
     void Update()
     {
-        var playerPos = new GeoCoordinatePortable.GeoCoordinate(lStatus.currLoc.LatitudeLongitude.x, lStatus.currLoc.LatitudeLongitude.y);
+        playerPos = new GeoCoordinatePortable.GeoCoordinate(lStatus.currLoc.LatitudeLongitude.x, lStatus.currLoc.LatitudeLongitude.y);
         var mapPos = new GeoCoordinatePortable.GeoCoordinate(33.253689744936516f,  -97.15234794376056f);
 
         dist = playerPos.GetDistanceTo(mapPos); //meters
