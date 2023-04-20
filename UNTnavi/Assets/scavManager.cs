@@ -24,8 +24,9 @@ public class scavManager : MonoBehaviour
 
     void Start()
     {
-        libPos = new GeoCoordinatePortable.GeoCoordinate(33.254128175827304, -97.15262459005834);
-        compPos = new GeoCoordinatePortable.GeoCoordinate(33.25401266313583, -97.15235645101363);
+        complete = false;
+        libPos = new GeoCoordinatePortable.GeoCoordinate(33.25412, -97.1525);
+        compPos = new GeoCoordinatePortable.GeoCoordinate(33.25398, -97.15235645101363);
         cafePos = new GeoCoordinatePortable.GeoCoordinate(33.25441064740028, -97.15262226850868);
     }
 
@@ -44,21 +45,25 @@ public class scavManager : MonoBehaviour
         {
             scavDist = player.playerPos.GetDistanceTo(cafePos);
         }
-        if (scavDist < 5)
+        if (scavDist < 6)
         {
             if (!complete)
             {
                 scavProgress++;
                 complete = true; 
                 // makes button blink if not open 
+                menu.blinkEffect();
                 // set scavMenu passing in scavProgress
+                menu.setScavMenu(scavProgress);
             }
         }
+        Debug.Log(scavDist);
     }
     public void nextPuzzle()
     {
         scavDist = 1000;
         complete = false;
         scavProgress++;
+        menu.setScavMenu(scavProgress);
     }
 }

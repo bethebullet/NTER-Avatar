@@ -22,6 +22,7 @@ public class UI_Script : MonoBehaviour
 
     public Camera ARcam;
     public Camera mapCam;
+    public GameObject player;
 
     public bool blink;
 
@@ -53,6 +54,8 @@ public class UI_Script : MonoBehaviour
         {
             scavButton.color = Lerp(white, green, 2);
         }
+
+        mapCam.transform.position = player.transform.position + new Vector3(0,3,0);
     }
 
     public void update(int state)
@@ -85,12 +88,13 @@ public class UI_Script : MonoBehaviour
         {
             scavMenu.SetActive(false);
             scavengerHunt = false;
+            scavButton.color = white;
+            blink = false;
         }
         else
         {
             scavMenu.SetActive(true);
             scavMenu.GetComponent<scavUI>().updateMenu(scavState);
-            blink = false;
             scavengerHunt = true;
         }
     }

@@ -19,6 +19,7 @@ public class scavUI : MonoBehaviour
             case 1:
                 menu1.SetActive(false);
                 menu2.SetActive(true);
+                sm.nextPuzzle();
                 break;
             case 2:
                 menu2.SetActive(false);
@@ -27,6 +28,7 @@ public class scavUI : MonoBehaviour
             case 3:
                 menu3.SetActive(false);
                 menu4.SetActive(true);
+                sm.nextPuzzle();
                 break;
             case 4:
                 menu4.SetActive(false);
@@ -35,11 +37,12 @@ public class scavUI : MonoBehaviour
             case 5:
                 menu5.SetActive(false);
                 menu6.SetActive(true);
+                sm.nextPuzzle();
                 break;
             default:
             menu1.SetActive(true);
                 break;
         }
-        sm.nextPuzzle();
+        
     }
 }
