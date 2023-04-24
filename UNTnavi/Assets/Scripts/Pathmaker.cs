@@ -32,12 +32,16 @@ public class Pathmaker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        myLocation = transform.position;
         if(path == null)
             return;
+
         distWP = Vector3.Distance(myLocation, path.vectorPath[currentWP]);
+        CheckPathProgress();
+
         if (distWP < .75f && currentWP < path.vectorPath.Count)
             currentWP++;
-        
+
         float sum = 0;
         for (int i = 0; i < path.vectorPath.Count - 1; i++)
         {
@@ -56,6 +60,31 @@ public class Pathmaker : MonoBehaviour
         // Debug.Log(currentWP);
 
 
+    }
+
+    // checks to see if the user has passed a waypoint
+    void CheckPathProgress()
+    {
+        float closestDist = 30;
+        int tempI = 0;
+        for (int i = 0; i < path.vectorPath.Count; i++)
+        {
+            float tDist = Vector3.Distance(myLocation, path.vectorPath[i]);
+            Debug.Log("dist: " + tDist);
+            if (tDist < closestDist)
+            {
+                closestDist = tDist;
+                tempI = i;
+            }
+            Debug.Log("dist: " + tDist);
+            Debug.Log(i);
+            Debug.Log(tempI);
+            Debug.Log(closestDist);
+        }
+        if (tempI > 0)
+            currentWP = tempI;
+        if(closestDist > 2)
+            UpdatePath();
     }
 
     void OnPathComplete(Path p)

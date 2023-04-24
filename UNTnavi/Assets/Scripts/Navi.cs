@@ -52,7 +52,8 @@ public class Navi : MonoBehaviour
         //     target = pm.path.vectorPath[pm.path.vectorPath.Count - 1];
         //     middle = target;
         // }
-
+        if (!moving)
+        {
         distSum = Vector3.Distance(pm.myLocation, pm.path.vectorPath[pm.currentWP]);
         pastMid = false;
         for (int i = pm.currentWP; i < pm.path.vectorPath.Count - 1; i++)
@@ -71,8 +72,8 @@ public class Navi : MonoBehaviour
 
         }
 
-        if (!moving)
             StartCoroutine(MoveNavi());
+        }
 
         if(ui.mapCam.enabled)
             tr.widthMultiplier = 2;
