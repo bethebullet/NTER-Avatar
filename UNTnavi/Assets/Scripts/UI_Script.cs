@@ -13,7 +13,7 @@ public class UI_Script : MonoBehaviour
     public GameObject scavMenu;
     public Image scavButton;
     public Color white => Color.white;
-    public Color green => Color.green;
+    public Color yellow => Color.yellow;
 
     public Toggle tog;
     public int screenState = 0;
@@ -24,7 +24,13 @@ public class UI_Script : MonoBehaviour
     public Camera mapCam;
     public GameObject player;
 
+    public GameObject marker;
+    public Pathmaker pm;
+
     public bool blink;
+
+    public int xpad;
+    public int ypad;
 
     void Start()
     {
@@ -37,6 +43,9 @@ public class UI_Script : MonoBehaviour
         scheduleObj.SetActive(false);
         scavState = 0; //remove this later when player prefs are added
 
+
+        xpad = 120;
+        ypad = 380;
         StartCoroutine(SplashFade());
     }
 
@@ -52,10 +61,25 @@ public class UI_Script : MonoBehaviour
         }
         if (blink)
         {
-            scavButton.color = Lerp(white, green, 2);
+            scavButton.color = Lerp(white, yellow, 2);
         }
 
-        mapCam.transform.position = player.transform.position + new Vector3(0,3,0);
+        var markPos = marker.transform.position;
+        mapCam.transform.position = player.transform.position + new Vector3(0,20,0);
+        marker.transform.position = ARcam.WorldToScreenPoint(pm.target);
+        if(marker.transform.position.x > Screen.width - xpad)
+            marker.transform.position = new Vector3(Screen.width - xpad, markPos.y, markPos.z);
+        if(marker.transform.position.x < 0 + xpad)
+            marker.transform.position = new Vector3(xpad, markPos.y, markPos.z);
+        if(marker.transform.position.y > Screen.height - ypad)
+            marker.transform.position = new Vector3(markPos.x, Screen.height - ypad, markPos.z);
+        if(marker.transform.position.y < 0 + ypad)
+            marker.transform.position = new Vector3(markPos.x, ypad, markPos.z);
+
+
+        
+        marker.transform.right = new Vector3(Screen.width/2, Screen.height/2, 0) - marker.transform.position;
+        marker.transform.rotation *= Quaternion.Euler(0,0,90);
     }
 
     public void update(int state)
