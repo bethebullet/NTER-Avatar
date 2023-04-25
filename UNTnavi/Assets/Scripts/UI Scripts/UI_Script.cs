@@ -82,7 +82,7 @@ public class UI_Script : MonoBehaviour
         marker.transform.rotation *= Quaternion.Euler(0,0,90);
     }
 
-    public void update(int state)
+    public void updateMenu(int state)
     {
         screenState = state;
 
@@ -91,18 +91,24 @@ public class UI_Script : MonoBehaviour
             mainMenuObj.SetActive(true);
             roomSearchObj.SetActive(false);
             scheduleObj.SetActive(false);
+            scavMenu.SetActive(false);
+            scavengerHunt = false;
         }
         else if (screenState == 1)
         {
             mainMenuObj.SetActive(false);
             roomSearchObj.SetActive(true);
             scheduleObj.SetActive(false);
+            scavMenu.SetActive(false);
+            scavengerHunt = false;
         }
         else if (screenState == 2)
         {
             mainMenuObj.SetActive(false);
             roomSearchObj.SetActive(false);
             scheduleObj.SetActive(true);
+            scavMenu.SetActive(false);
+            scavengerHunt = false;
         }
     }
 
