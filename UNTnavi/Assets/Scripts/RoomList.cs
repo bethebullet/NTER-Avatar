@@ -32,7 +32,6 @@ public class RoomList : MonoBehaviour
         elevators = new List<GameObject>(actors);
 
         GameObject.FindGameObjectWithTag("UI").GetComponent<SearchScript>().InitializeSearch(this);
-        GameObject.FindGameObjectWithTag("UI").GetComponent<ScheduleSearch>().InitializeSearch(this);
     }
 
     public void FindObjectwithTag(string tag)
