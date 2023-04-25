@@ -116,6 +116,7 @@ public class Pathmaker : MonoBehaviour
         {
             return p.GetTotalLength();
         }
+        Debug.Log("Complete error");
         return 9999;
     }
 
@@ -125,6 +126,7 @@ public class Pathmaker : MonoBehaviour
         {
             return OnCheckPathComplete(seeker.StartPath(myLocation, locale));
         }
+        Debug.Log("Check error");
         return 9999;
     }
 }

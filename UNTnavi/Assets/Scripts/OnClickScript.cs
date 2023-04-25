@@ -17,13 +17,13 @@ public class OnClickScript : MonoBehaviour
 
     public void StairClick()
     {
-        pm.FindTarget(FindClosestPath(search.lists.stairs));
+        pm.FindTarget(FindClosestPlace(search.lists.stairs));
         ui.updateMenu(0);
     }
 
     public void ElevatorClick()
     {
-        pm.FindTarget(FindClosestPath(search.lists.elevators));
+        pm.FindTarget(FindClosestPlace(search.lists.elevators));
         ui.updateMenu(0);
     }
 
@@ -32,20 +32,23 @@ public class OnClickScript : MonoBehaviour
         ui.updateMenu(0);
     }
 
-    GameObject FindClosestPath(List<GameObject> places)
+    GameObject FindClosestPlace(List<GameObject> places)
     {
         float closestDist = 999;
         GameObject place = places[0];
 
         for(int i = 0; i < places.Count; i ++)
         {
-            float dist = pm.CheckPath(places[i].transform.position);
+            // float dist = pm.CheckPath(places[i].transform.position);
+            float dist = Vector3.Distance(pm.myLocation, places[i].transform.position);
             if(dist < closestDist)
             {
                 closestDist = dist;
                 place = places[i];
             }
         }
+
+        // Debug.Log(place.name);
         return place;
     }
 
