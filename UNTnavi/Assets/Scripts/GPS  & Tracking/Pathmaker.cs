@@ -109,24 +109,25 @@ public class Pathmaker : MonoBehaviour
     }
 
     // stairs, elevator and bathroom check
+    // unused, takes time
 
-    float OnCheckPathComplete(Path p)
-    {
-        if(!p.error)
-        {
-            return p.GetTotalLength();
-        }
-        Debug.Log("Complete error");
-        return 9999;
-    }
+    // float OnCheckPathComplete(Path p)
+    // {
+    //     if(!p.error)
+    //     {
+    //         return p.GetTotalLength();
+    //     }
+    //     Debug.Log("Complete error");
+    //     return 9999;
+    // }
 
-    public float CheckPath(Vector3 locale)
-    {
-        if(seeker.IsDone())
-        {
-            return OnCheckPathComplete(seeker.StartPath(myLocation, locale));
-        }
-        Debug.Log("Check error");
-        return 9999;
-    }
+    // public float CheckPath(Vector3 locale)
+    // {
+    //     if(seeker.IsDone())
+    //     {
+    //         return OnCheckPathComplete(seeker.StartPath(myLocation, locale));
+    //     }
+    //     Debug.Log("Check error");
+    //     return 9999;
+    // }
 }
