@@ -38,7 +38,7 @@ public class Navi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pm == null || pm.path == null || pm.path.vectorPath.Count < pm.currentWP || pm.currentWP < 0)
+        if(pm == null || pm.path == null || pm.currentWP >= pm.path.vectorPath.Count  || pm.currentWP < 0)
             return;
 
         // middle = pm.path.vectorPath[pm.currentWP];
@@ -54,25 +54,25 @@ public class Navi : MonoBehaviour
         // }
         if (!moving)
         {
-        distSum = Vector3.Distance(pm.myLocation, pm.path.vectorPath[pm.currentWP]);
-        pastMid = false;
-        for (int i = pm.currentWP; i < pm.path.vectorPath.Count - 1; i++)
-        {
-            distSum += Vector3.Distance(pm.path.vectorPath[i], pm.path.vectorPath[i + 1]);
-            if(distSum > travelDist/2 && !pastMid)
+            distSum = Vector3.Distance(pm.myLocation, pm.path.vectorPath[pm.currentWP]);
+            pastMid = false;
+            for (int i = pm.currentWP; i < pm.path.vectorPath.Count - 1; i++)
             {
-                middle = pm.path.vectorPath[i] + new Vector3 (0,1,0);
-                pastMid = true;
+                distSum += Vector3.Distance(pm.path.vectorPath[i], pm.path.vectorPath[i + 1]);
+                if(distSum > travelDist/2 && !pastMid)
+                {
+                    middle = pm.path.vectorPath[i] + new Vector3 (0,1,0);
+                    pastMid = true;
+                }
+                if(distSum > travelDist)
+                {
+                    target = pm.path.vectorPath[i] + new Vector3 (0,1,0);
+                    i = pm.path.vectorPath.Count;
+                } 
+
             }
-            if(distSum > travelDist)
-            {
-                target = pm.path.vectorPath[i] + new Vector3 (0,1,0);
-                i = pm.path.vectorPath.Count;
-            } 
 
-        }
-
-            StartCoroutine(MoveNavi());
+                StartCoroutine(MoveNavi());
         }
 
         if(ui.mapCam.enabled)

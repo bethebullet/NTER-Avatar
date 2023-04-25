@@ -57,7 +57,7 @@ public class scavManager : MonoBehaviour
                 menu.setScavMenu(scavProgress);
             }
         }
-        Debug.Log(scavDist);
+        // Debug.Log(scavDist);
     }
     public void nextPuzzle()
     {

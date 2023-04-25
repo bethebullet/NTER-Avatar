@@ -33,8 +33,9 @@ public class Pathmaker : MonoBehaviour
     void Update()
     {
         myLocation = transform.position;
-        if(path == null)
+        if(path == null || currentWP >= path.vectorPath.Count)
             return;
+
 
         distWP = Vector3.Distance(myLocation, path.vectorPath[currentWP]);
         CheckPathProgress();
@@ -70,16 +71,12 @@ public class Pathmaker : MonoBehaviour
         for (int i = 0; i < path.vectorPath.Count; i++)
         {
             float tDist = Vector3.Distance(myLocation, path.vectorPath[i]);
-            Debug.Log("dist: " + tDist);
+
             if (tDist < closestDist)
             {
                 closestDist = tDist;
                 tempI = i;
             }
-            Debug.Log("dist: " + tDist);
-            Debug.Log(i);
-            Debug.Log(tempI);
-            Debug.Log(closestDist);
         }
         if (tempI > 0)
             currentWP = tempI;
@@ -107,7 +104,7 @@ public class Pathmaker : MonoBehaviour
     public void FindTarget(GameObject room)
     {
         target = room.transform.position;
-        Debug.Log(room.transform.position);
+        // Debug.Log(room.transform.position);
         UpdatePath();
     }
 }
