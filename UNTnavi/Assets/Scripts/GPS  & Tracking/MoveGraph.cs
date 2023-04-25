@@ -17,7 +17,7 @@ public class MoveGraph : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {   
         grid.RelocateNodes(transform.position, Quaternion.Euler(0f, 122f, 0f), 1f, 1, 0);
     }

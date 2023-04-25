@@ -41,7 +41,6 @@ public class UI_Script : MonoBehaviour
         mainMenuObj.SetActive(true);
         roomSearchObj.SetActive(false);
         scheduleObj.SetActive(false);
-        scavState = 0; //remove this later when player prefs are added
 
 
         xpad = 120;

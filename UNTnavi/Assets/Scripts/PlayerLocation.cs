@@ -36,7 +36,7 @@ public class PlayerLocation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(cb.startTracking)    
             northRotation = cb.northRotation;

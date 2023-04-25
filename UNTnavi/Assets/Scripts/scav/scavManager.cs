@@ -7,7 +7,7 @@ using Mapbox.Utils;
 public class scavManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public DetectDistance player; // used for player.plaerPos
+    public DetectDistance player; // used for player.playerPos
 
     public UI_Script menu; // used for popups
 
@@ -15,7 +15,7 @@ public class scavManager : MonoBehaviour
 
     public double scavDist;
 
-    [SerializeField] private int scavProgress = 0;
+    [SerializeField] private int scavProgress;
 
     bool complete;
     GeoCoordinatePortable.GeoCoordinate libPos;
@@ -28,10 +28,12 @@ public class scavManager : MonoBehaviour
         libPos = new GeoCoordinatePortable.GeoCoordinate(33.25412, -97.1525);
         compPos = new GeoCoordinatePortable.GeoCoordinate(33.25398, -97.15235645101363);
         cafePos = new GeoCoordinatePortable.GeoCoordinate(33.25441064740028, -97.15262226850868);
+        scavProgress = PlayerPrefs.GetInt("ScavProgress", 0);
+        menu.setScavMenu(scavProgress);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(scavProgress == 0)
         {
@@ -50,6 +52,7 @@ public class scavManager : MonoBehaviour
             if (!complete)
             {
                 scavProgress++;
+                PlayerPrefs.SetInt("ScavProgress", scavProgress);
                 complete = true; 
                 // makes button blink if not open 
                 menu.blinkEffect();
@@ -64,6 +67,14 @@ public class scavManager : MonoBehaviour
         scavDist = 1000;
         complete = false;
         scavProgress++;
+        PlayerPrefs.SetInt("ScavProgress", scavProgress);
+        menu.setScavMenu(scavProgress);
+    }
+
+    public void resetProgress()
+    {
+        scavProgress = 0;
+        PlayerPrefs.SetInt("ScavProgress", scavProgress);
         menu.setScavMenu(scavProgress);
     }
 }

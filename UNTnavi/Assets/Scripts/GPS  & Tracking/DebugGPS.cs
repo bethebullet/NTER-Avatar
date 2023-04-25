@@ -26,7 +26,7 @@ public class DebugGPS : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         currentLocation = _locationProvider.CurrentLocation.LatitudeLongitude;
         location.text = "CL: " + currentLocation.x + ", " + currentLocation.y;

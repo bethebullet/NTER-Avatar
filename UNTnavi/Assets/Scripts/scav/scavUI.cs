@@ -41,6 +41,7 @@ public class scavUI : MonoBehaviour
                 break;
             default:
             menu1.SetActive(true);
+            menu6.SetActive(false);
                 break;
         }
         

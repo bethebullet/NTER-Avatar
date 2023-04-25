@@ -36,7 +36,7 @@ public class Navi : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(pm == null || pm.path == null || pm.currentWP >= pm.path.vectorPath.Count  || pm.currentWP < 0)
             return;
