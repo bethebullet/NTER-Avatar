@@ -13,7 +13,7 @@ public class DetectDistance : MonoBehaviour
     public GeoCoordinatePortable.GeoCoordinate playerPos;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         playerPos = new GeoCoordinatePortable.GeoCoordinate(lStatus.currLoc.LatitudeLongitude.x, lStatus.currLoc.LatitudeLongitude.y);
         var mapPos = new GeoCoordinatePortable.GeoCoordinate(33.253689744936516f,  -97.15234794376056f);

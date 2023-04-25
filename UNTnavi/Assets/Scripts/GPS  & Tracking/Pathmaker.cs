@@ -30,7 +30,7 @@ public class Pathmaker : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         myLocation = transform.position;
         if(path == null || currentWP >= path.vectorPath.Count)
