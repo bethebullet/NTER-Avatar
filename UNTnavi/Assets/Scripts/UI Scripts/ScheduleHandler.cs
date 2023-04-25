@@ -36,6 +36,7 @@ public class ScheduleHandler : MonoBehaviour
     private List<ClassObject> classObjects;
     private int MAX_CLASSES_ALLOWED = 8;
     private int classCount = 0;
+    private int hasLoaded = 0;
 
     void Start(){
         /*float width = container.sizeDelta.x;
@@ -216,30 +217,33 @@ public class ScheduleHandler : MonoBehaviour
     }
 
     public void LoadSchedule() {
-      Debug.Log("Loading schedule.");
-      string path = Application.persistentDataPath + "/schedule.bin";
-      if (File.Exists(path))
-      {
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(path, FileMode.Open);
+        if(hasLoaded == 0)
+        {
+            Debug.Log("Loading schedule.");
+            string path = Application.persistentDataPath + "/schedule.bin";
+            if (File.Exists(path))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                FileStream stream = new FileStream(path, FileMode.Open);
 
-        classPartitions = (List<ClassScheduleItem>) formatter.Deserialize(stream);
-        stream.Close();
+                classPartitions = (List<ClassScheduleItem>) formatter.Deserialize(stream);
+                stream.Close();
 
-        classCount = classPartitions.Count;
+                classCount = classPartitions.Count;
 
-        //Test
-        Debug.Log("Number of classes in the schedule: " + classCount);
-        for (int i = 0; i<classPartitions.Count;i++){
-            ClassScheduleItem item = classPartitions[i];
-            Debug.Log("Class name: " + item.className);
+                //Test
+                Debug.Log("Number of classes in the schedule: " + classCount);
+                for (int i = 0; i<classPartitions.Count;i++){
+                    ClassScheduleItem item = classPartitions[i];
+                    Debug.Log("Class name: " + item.className);
+                }
+
+                classObjects = new List<ClassObject>();
+                // Populate list of unity objects
+                PopulateObjects();
+                hasLoaded++;
+            }
         }
-
-        classObjects = new List<ClassObject>();
-        // Populate list of unity objects
-        PopulateObjects();
-
-      }
     }
 
     public void PopulateObjects() {
