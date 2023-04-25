@@ -726,7 +726,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1483571986}
         m_TargetAssemblyTypeName: UI_Script, Assembly-CSharp
-        m_MethodName: update
+        m_MethodName: updateMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1634,7 +1634,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1483571986}
         m_TargetAssemblyTypeName: UI_Script, Assembly-CSharp
-        m_MethodName: update
+        m_MethodName: updateMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2437,7 +2437,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1483571986}
         m_TargetAssemblyTypeName: UI_Script, Assembly-CSharp
-        m_MethodName: update
+        m_MethodName: updateMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3959,12 +3959,24 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1483571986}
         m_TargetAssemblyTypeName: UI_Script, Assembly-CSharp
-        m_MethodName: update
+        m_MethodName: updateMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1483571988}
+        m_TargetAssemblyTypeName: ScheduleHandler, Assembly-CSharp
+        m_MethodName: LoadSchedule
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5130,7 +5142,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1483571986}
         m_TargetAssemblyTypeName: UI_Script, Assembly-CSharp
-        m_MethodName: update
+        m_MethodName: updateMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7698,10 +7710,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0603d34b5f552a440a926de306f25567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiScript: {fileID: 0}
   Element: []
   SearchBar: {fileID: 1636013784}
   totalElements: 0
   maps: {fileID: 0}
+  lists: {fileID: 0}
   m_ContentContainer: {fileID: 77398232}
   m_ItemPrefab: {fileID: 683063496428183902, guid: 5f81c166de8a7ea4c8d1f6f308b7a8cb,
     type: 3}
@@ -9219,7 +9233,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1770993523}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1483571986}
+        m_TargetAssemblyTypeName: UI_Script, Assembly-CSharp
+        m_MethodName: updateMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1483571988}
+        m_TargetAssemblyTypeName: ScheduleHandler, Assembly-CSharp
+        m_MethodName: LoadSchedule
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1770993523
 MonoBehaviour:
   m_ObjectHideFlags: 0
