@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ARNavigator.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Brandon Map.unity
     guid: d11afef2b0d0e9f439d3f5580489e7a5
   - enabled: 0
