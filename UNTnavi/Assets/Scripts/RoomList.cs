@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class RoomList : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class RoomList : MonoBehaviour
         if(searchTag != null)
             FindObjectwithTag(searchTag);
         doors = new List<GameObject>(actors);
+        doors = doors.OrderBy(d=> d.name).ToList();
 
         searchTag = "Stairs";
         if(searchTag != null)
@@ -30,6 +32,7 @@ public class RoomList : MonoBehaviour
         if(searchTag != null)
             FindObjectwithTag(searchTag);
         elevators = new List<GameObject>(actors);
+
 
         GameObject.FindGameObjectWithTag("UI").GetComponent<SearchScript>().InitializeSearch(this);
     }

@@ -74,10 +74,260 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5217791312449761300}
     m_Modifications:
+    - target: {fileID: 37961660107629757, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 204413988200513802, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 227233630312028320, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 341995231528829147, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 345438276460209736, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 504404300874882434, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 519161577685820898, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 555596710896917456, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 848689873232051998, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 949102291903719135, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172333155202612631, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494297781194140839, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1546488753735789104, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653833744826229190, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681139960128194559, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715682812566792833, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1810270834787721294, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858259517099128220, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E144
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858259517099128220, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862199296606760185, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490216231581317988, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2505859127875054828, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636268969473973763, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921159513874347290, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921159513874347290, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946895608658055338, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196337791553968228, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197454523260171224, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241613386650914120, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3342415618642250456, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446408696346077220, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623048364348674216, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693303107920256742, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729937045238166025, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3910070854550448403, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4012100447032151759, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4039902549033930738, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247942688538198149, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254893130470437112, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
     - target: {fileID: 4282889860637045408, guid: 88c76e0b838588246b26c9c2871c136c,
         type: 3}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307853079781482274, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408319212072091618, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540592563282097432, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4608304345910346334, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616171375323153804, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641822805368812171, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677883645511417785, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137918588020883768, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E139
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137918588020883768, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5543961295930408946, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544824709803105563, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5554750146760626833, guid: 88c76e0b838588246b26c9c2871c136c,
         type: 3}
@@ -168,6 +418,226 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5752090340868625583, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860191487326431290, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864923775037700164, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865735240750164017, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E135
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865735240750164017, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987956547745631620, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337521172942310860, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352484812658052723, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443302044163530795, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443302044163530795, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864691354885378022, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871754090705707789, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998829196018078715, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285350459094097443, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529576258421571992, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585845291141838560, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634704682739210553, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664654101738771614, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748869492569622351, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E145
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748869492569622351, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790807588805793901, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7832953144070018147, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841435664014589330, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847762422079639769, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911838736787884891, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053196763824731768, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128391034106343173, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8196814378801073200, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8196814378801073200, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204218690314371797, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231170813919372471, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325657279900992245, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424677385114299177, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_Name
+      value: E137
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424677385114299177, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8444741118470079903, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750344316773134685, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759692129166574723, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766174753668668592, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Elevator
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769663410966798724, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781722257647459730, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801038557330744165, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872177164101523966, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958598006616390351, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977727862242977751, guid: 88c76e0b838588246b26c9c2871c136c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c76e0b838588246b26c9c2871c136c, type: 3}

@@ -13,8 +13,8 @@ public class PlayerLocation : MonoBehaviour
     public float northRotation;
     public float compassOffset;
 
-    bool synced;
-    float syncDelay;
+    // bool synced;
+    // float syncDelay;
 
     Gyroscope gyro;
     Quaternion gyroCorrection;
@@ -28,8 +28,8 @@ public class PlayerLocation : MonoBehaviour
         height = 6;
         compassOffset = 0;//-4.17f;
         ar = GetComponent<ARSessionOrigin>();
-        synced = false;
-        syncDelay = 2;
+        // synced = false;
+        // syncDelay = 2;
 
         gyro = Input.gyro;
         gyro.enabled = true;
@@ -54,13 +54,13 @@ public class PlayerLocation : MonoBehaviour
         // transform.rotation = Quaternion.Lerp(Quaternion.identity, Quaternion.Euler(0, northRotation, 0), Time.deltaTime * .2f);
     }
 
-    IEnumerator SyncCompass()
-    {
-        ar.MakeContentAppearAt(playerT.transform,  transform.position, Quaternion.Euler(0, -northRotation + compassOffset,0));
-        synced = true;
-        yield return new WaitForSeconds(syncDelay);
-        synced = false;
-    }
+    // IEnumerator SyncCompass()
+    // {
+    //     ar.MakeContentAppearAt(playerT.transform,  transform.position, Quaternion.Euler(0, -northRotation + compassOffset,0));
+    //     synced = true;
+    //     yield return new WaitForSeconds(syncDelay);
+    //     synced = false;
+    // }
 
     void GyroModifyCamera()
     {   

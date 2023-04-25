@@ -16,7 +16,7 @@ public class Navi : MonoBehaviour
     Vector3 target;
 
     bool moving;
-    int marker;
+
     public float speed;
 
     void Awake()
@@ -98,7 +98,6 @@ public class Navi : MonoBehaviour
 
         // Debug.Log(transform.position);
         float timer = 0;
-        marker = 0;
 
         int i = 0;
         while(Vector3.Distance(transform.position, middle) > .1f && i < 100)
@@ -111,7 +110,7 @@ public class Navi : MonoBehaviour
             timer += Time.deltaTime;
             i++;
             yield return new WaitForSeconds(.01f);
-            Debug.Log(Vector3.Distance(transform.position, middle));
+            // Debug.Log(Vector3.Distance(transform.position, middle));
         }
         // Debug.Log("Middle");
         i = 0;

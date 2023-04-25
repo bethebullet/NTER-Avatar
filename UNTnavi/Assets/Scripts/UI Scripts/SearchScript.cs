@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class SearchScript : MonoBehaviour
 {
+    public UI_Script uiScript;
     public List<GameObject> Element;
     public GameObject SearchBar;
     public int totalElements;
     public GameObject maps;
-    RoomList lists;
+    public RoomList lists;
     [SerializeField] private Transform m_ContentContainer;
     [SerializeField] private GameObject m_ItemPrefab;
     [SerializeField] private  Pathmaker player;
@@ -43,6 +44,7 @@ public class SearchScript : MonoBehaviour
         {
             //using the prefab, create a new object inside of SearchContent
             var item_go = Instantiate(m_ItemPrefab);
+            item_go.GetComponent<OnClickScript>().ui = uiScript;
             item_go.GetComponent<OnClickScript>().pm = player;
             item_go.GetComponent<OnClickScript>().room = Element[i];
             //set the text of the object to the name of the door

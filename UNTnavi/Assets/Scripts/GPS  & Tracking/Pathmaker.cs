@@ -107,4 +107,24 @@ public class Pathmaker : MonoBehaviour
         // Debug.Log(room.transform.position);
         UpdatePath();
     }
+
+    // stairs, elevator and bathroom check
+
+    float OnCheckPathComplete(Path p)
+    {
+        if(!p.error)
+        {
+            return p.GetTotalLength();
+        }
+        return 9999;
+    }
+
+    public float CheckPath(Vector3 locale)
+    {
+        if(seeker.IsDone())
+        {
+            return OnCheckPathComplete(seeker.StartPath(myLocation, locale));
+        }
+        return 9999;
+    }
 }
