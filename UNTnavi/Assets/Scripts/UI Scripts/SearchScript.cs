@@ -21,6 +21,10 @@ public class SearchScript : MonoBehaviour
         lists = null;
     }
 
+    public List<GameObject> GetRoomList(){
+        return Element;
+    }
+
     public void InitializeSearch(RoomList x)
     {
 
@@ -57,6 +61,12 @@ public class SearchScript : MonoBehaviour
             //set the scale of the object to 1
             item_go.transform.localScale = Vector2.one;
 
+        }
+        //loop through each element in the list
+        for(int i = 0; i < Element.Count; i++)
+        {
+            //set the element value to the child of SearchContent
+            Element[i] = m_ContentContainer.GetChild(i).gameObject;
         }
     }
 
@@ -99,12 +109,6 @@ public class SearchScript : MonoBehaviour
 
     public void Search()
     {
-        //loop through each element in the list
-        for(int i = 0; i < Element.Count; i++)
-        {
-            //set the element value to the child of SearchContent
-            Element[i] = m_ContentContainer.GetChild(i).gameObject;
-        }
 
         string SearchText = SearchBar.GetComponent<TMP_InputField>().text;
         int searchTxtlength = SearchText.Length;

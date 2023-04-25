@@ -15,12 +15,14 @@ public struct ClassScheduleItem{ // Can be saved to a file
     public string endTime;
     public string className;
     public int index;
+    public IDictionary<string,int> classDays;
     // public GameObject label;
 }
 
 public struct ClassObject{ // Unity Object
     public int index;
     public GameObject label;
+    public bool valid;
 }
 
 public class ScheduleHandler : MonoBehaviour
@@ -32,7 +34,7 @@ public class ScheduleHandler : MonoBehaviour
     //sort classes by start time
     [SerializeField] private GameObject scheduleTemplate;
     [SerializeField] private Transform TemplateContainer;
-    private List<ClassScheduleItem> classPartitions;
+    public List<ClassScheduleItem> classPartitions;
     private List<ClassObject> classObjects;
     private int MAX_CLASSES_ALLOWED = 8;
     private int classCount = 0;
@@ -53,7 +55,9 @@ public class ScheduleHandler : MonoBehaviour
         classObjects = new List<ClassObject>();
     }
     void Update(){}
-    public void SortClasses(){} // sort classes by schedule start time and set their order index
+    public void SortClasses(){
+        //classes = classes.OrderBy(c=> c.startTime).ToList();
+    } // sort classes by schedule start time and set their order index
     public void NewClassTemplate(){
         if(classCount >= MAX_CLASSES_ALLOWED){return;}//dont add any more if they have 8
         ClassScheduleItem item = new ClassScheduleItem();
@@ -76,20 +80,22 @@ public class ScheduleHandler : MonoBehaviour
 
         Transform nameInput = templateCopy.transform.Find("ClassNameInput");
         TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
-        name.onEndEdit.AddListener(delegate{SaveName(item.index, name.text);});
+        name.onEndEdit.AddListener(delegate{SaveAll(item.index);});
 
         Transform startInput = templateCopy.transform.Find("StartInput");
         TMP_InputField start = startInput.GetComponent<TMP_InputField>();
-        start.onEndEdit.AddListener(delegate{SaveStart(item.index, start.text);});
+        start.onEndEdit.AddListener(delegate{SaveAll(item.index);});
 
         Transform endInput = templateCopy.transform.Find("EndInput");
         TMP_InputField end = endInput.GetComponent<TMP_InputField>();
-        end.onEndEdit.AddListener(delegate{SaveEnd(item.index, end.text);});
+        end.onEndEdit.AddListener(delegate{SaveAll(item.index);});
 
         Transform roomInput = templateCopy.transform.Find("RoomInput");
         TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
-        room.onEndEdit.AddListener(delegate{SaveRoom(item.index, room.text);});
-
+        
+        room.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+        room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
+        
         classCount++;
     }
     public void DeleteClassTemplate(int idx){
@@ -123,86 +129,40 @@ public class ScheduleHandler : MonoBehaviour
         SortClasses();
         SaveSchedule();
     }
-    public void SaveName(int idx, string text) {
-      for (int i = 0; i<classPartitions.Count;i++){
-          ClassScheduleItem item = classPartitions[i];
-          if(item.index == idx){
-              ClassScheduleItem updatedClass = new ClassScheduleItem();
-              updatedClass.index = idx;
-              updatedClass.className = text;
-              updatedClass.startTime = item.startTime;
-              updatedClass.endTime = item.endTime;
-              updatedClass.roomNumber = item.roomNumber;
 
-              classPartitions[i] = updatedClass;
-              Debug.Log(classPartitions[i].className);
-              SaveSchedule();
-          }
-      }
+    public void SaveAll(int idx){
+        for (int i = 0; i<classPartitions.Count;i++){
+            ClassObject thisClass = classObjects[idx];
+            if(idx == i){ // && thisClass.valid == true
+                ClassScheduleItem item = classPartitions[idx];
+                ClassScheduleItem updatedClass = new ClassScheduleItem();
+                updatedClass.index = idx;
+                
+                GameObject templateCopy = thisClass.label;
+                Transform nameInput = templateCopy.transform.Find("ClassNameInput");
+                TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
+                updatedClass.className = name.text;
+
+                Transform startInput = templateCopy.transform.Find("StartInput");
+                TMP_InputField start = startInput.GetComponent<TMP_InputField>();
+                updatedClass.startTime = start.text;
+
+                Transform endInput = templateCopy.transform.Find("EndInput");
+                TMP_InputField end = endInput.GetComponent<TMP_InputField>();
+                updatedClass.endTime = end.text;
+
+                Transform roomInput = templateCopy.transform.Find("RoomInput");
+                TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
+                updatedClass.roomNumber = room.text;
+
+                classPartitions[idx] = updatedClass;
+                Debug.Log(classPartitions[idx].className);
+                SaveSchedule();
+                break;
+            }
+        }
     }
 
-    public void SaveStart(int idx, string text) {
-      // for (int i = 0; i<classPartitions.Count;i++){
-      //     ClassScheduleItem item = classPartitions[i];
-      //     if(item.index == idx){
-      //         item.startTime = text;
-      //         Debug.Log(item.startTime);
-      //         SaveSchedule();
-      //     }
-      // }
-
-      for (int i = 0; i<classPartitions.Count;i++){
-          ClassScheduleItem item = classPartitions[i];
-          if(item.index == idx){
-              ClassScheduleItem updatedClass = new ClassScheduleItem();
-              updatedClass.index = idx;
-              updatedClass.className = item.className;
-              updatedClass.startTime = text;
-              updatedClass.endTime = item.endTime;
-              updatedClass.roomNumber = item.roomNumber;
-
-              classPartitions[i] = updatedClass;
-              Debug.Log(classPartitions[i].startTime);
-              SaveSchedule();
-          }
-      }
-    }
-
-    public void SaveEnd(int idx, string text) {
-      for (int i = 0; i<classPartitions.Count;i++){
-          ClassScheduleItem item = classPartitions[i];
-          if(item.index == idx){
-              ClassScheduleItem updatedClass = new ClassScheduleItem();
-              updatedClass.index = idx;
-              updatedClass.className = item.className;
-              updatedClass.startTime = item.startTime;
-              updatedClass.endTime = text;
-              updatedClass.roomNumber = item.roomNumber;
-
-              classPartitions[i] = updatedClass;
-              Debug.Log(classPartitions[i].endTime);
-              SaveSchedule();
-          }
-      }
-    }
-
-    public void SaveRoom(int idx, string text) {
-      for (int i = 0; i<classPartitions.Count;i++){
-          ClassScheduleItem item = classPartitions[i];
-          if(item.index == idx){
-              ClassScheduleItem updatedClass = new ClassScheduleItem();
-              updatedClass.index = idx;
-              updatedClass.className = item.className;
-              updatedClass.startTime = item.startTime;
-              updatedClass.endTime = item.endTime;
-              updatedClass.roomNumber = text;
-
-              classPartitions[i] = updatedClass;
-              Debug.Log(classPartitions[i].roomNumber);
-              SaveSchedule();
-          }
-      }
-    }
 
     public void SaveSchedule () {
       BinaryFormatter formatter = new BinaryFormatter();
@@ -241,8 +201,8 @@ public class ScheduleHandler : MonoBehaviour
                 classObjects = new List<ClassObject>();
                 // Populate list of unity objects
                 PopulateObjects();
-                hasLoaded++;
             }
+            hasLoaded++;
         }
     }
 
@@ -269,25 +229,50 @@ public class ScheduleHandler : MonoBehaviour
           TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
           name.text = item.className;
           // name.text = "Cybersecurity";
-          name.onEndEdit.AddListener(delegate{SaveName(item.index, name.text);});
+          name.onEndEdit.AddListener(delegate{SaveAll(item.index);});
 
           Transform startInput = templateCopy.transform.Find("StartInput");
           TMP_InputField start = startInput.GetComponent<TMP_InputField>();
           start.text = item.startTime;
           // start.text = "9:30";
-          start.onEndEdit.AddListener(delegate{SaveStart(item.index, start.text);});
+          start.onEndEdit.AddListener(delegate{SaveAll(item.index);});
 
           Transform endInput = templateCopy.transform.Find("EndInput");
           TMP_InputField end = endInput.GetComponent<TMP_InputField>();
           end.text = item.endTime;
           // end.text = "10:50";
-          end.onEndEdit.AddListener(delegate{SaveEnd(item.index, end.text);});
+          end.onEndEdit.AddListener(delegate{SaveAll(item.index);});
 
           Transform roomInput = templateCopy.transform.Find("RoomInput");
           TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
           room.text =  item.roomNumber;
           // room.text = "B190";
-          room.onEndEdit.AddListener(delegate{SaveRoom(item.index, room.text);});
+          room.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+          room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
       }
+    }
+
+
+    public void SearchRoom(int index,string input){
+        SearchScript sn = GameObject.Find("UI Canvas").GetComponent<SearchScript>();
+        ClassObject obj = classObjects[index];
+        Outline outline = obj.label.transform.Find("RoomInput").GetComponent<Outline>();
+        int match = 0;
+        foreach(GameObject ele in sn.GetRoomList())
+        {
+            TextMeshProUGUI t = ele.transform.GetComponentInChildren<TextMeshProUGUI>(true);
+            if(t != null){
+                if(input.ToLower() == t.text.ToLower()){
+                    outline.effectColor = new Color(0.0f,1.0f,0.0f,1.0f);
+                    match = 1;
+                    //obj.valid = true;
+                    break;
+                }
+            }
+        }
+        if (match == 0){
+            outline.effectColor = new Color(1.0f,0.0f,0.0f,1.0f);
+            //obj.valid = false;
+        }
     }
 }
