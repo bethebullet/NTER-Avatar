@@ -59,10 +59,83 @@ public class ScheduleHandler : MonoBehaviour
 
         LoadSchedule();
     }
-    void Update(){}
 
     public void SortClasses(){
-        //classes = classes.OrderBy(c=> c.startTime).ToList();
+        //classObjects = classObjects.OrderBy(classObjects=> int.TryParse(classObjects.index.startTime)).ToList();
+        int newListLength = 0;
+        int i = 0;
+        bool notUsed = true;
+        int minTime = 200000;
+        int minIndex = 200000;
+        int loopCount = 0;
+        List<int> newClass = new List<int>();
+        List<ClassScheduleItem> newClassPartitions = new List<ClassScheduleItem>();
+        if (classPartitions.Count != 0)
+        {
+        while (newListLength != classCount)
+        {
+            if (newClass.Count != 0)
+            {
+                foreach (int j in newClass)
+                {
+                    if ( i == j)
+                    {
+                         notUsed = false;
+                    }
+                }
+            }
+            if (notUsed)
+            {
+
+                int hourTime = 0; 
+                int minuteTime = 0;
+                int tempTime = 100000;
+                int colon =  classPartitions[i].startTime.IndexOf(":");
+                int amPM = classPartitions[i].startTime.IndexOf("M") - 2;
+                bool success1 = int.TryParse(classPartitions[i].startTime.Substring(0, colon), out hourTime);
+                bool success2 = int.TryParse(classPartitions[i].startTime.Substring(colon+1, amPM - colon-1), out minuteTime);
+                if (success1 && success2)
+                {
+                    string tod = classPartitions[i].startTime.Substring(amPM+1, 2);
+                    if (tod.Equals("PM") && hourTime != 12)
+                    {
+                     minuteTime = minuteTime + 720;
+                    }
+                    if (tod.Equals("AM") && hourTime == 12)
+                    {    
+                    hourTime = 0;
+                    }
+                    hourTime = hourTime * 60;
+                    tempTime = hourTime + minuteTime;
+
+                    if (tempTime < minTime)
+                    {
+                        minTime = tempTime;
+                        minIndex = i;
+                    }
+                }
+            }
+            i++;
+            notUsed = true;
+            if (i == classCount)
+            {
+                newClassPartitions.Add(classPartitions[minIndex]);
+                newClass.Add(minIndex);
+                i = 0;
+                loopCount++;
+                newListLength++;
+                Debug.Log(minIndex);
+                minIndex = 10000;
+                minTime = 1000000;
+            }
+        }
+        i = 0;
+        foreach(ClassScheduleItem item in newClassPartitions)
+        {
+            classPartitions[i] = item;
+            i++;
+        }
+        }
     } // sort classes by schedule start time and set their order index
 
     public void NewClassTemplate(){
@@ -133,7 +206,7 @@ public class ScheduleHandler : MonoBehaviour
                 }
             }
         }
-        SortClasses();
+        //SortClasses();
     }
 
     public void BackCheck()
