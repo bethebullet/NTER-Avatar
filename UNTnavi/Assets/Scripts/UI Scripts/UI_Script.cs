@@ -134,12 +134,12 @@ public class UI_Script : MonoBehaviour
 
     IEnumerator SplashFade()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1.0f);
         var color = splashscreen.GetComponent<CanvasGroup>();
         for (float x = 1; x > 0; x += -.05f)
         {
             color.alpha = x;
-            yield return new WaitForSeconds(.005f);
+            yield return new WaitForSeconds(.01f);
         }
         color.alpha = 0;
         splashscreen.SetActive(false);
