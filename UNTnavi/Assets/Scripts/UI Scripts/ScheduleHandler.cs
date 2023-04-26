@@ -16,7 +16,6 @@ public struct ClassScheduleItem{ // Can be saved to a file
     public string endTime;
     public string className;
     public int index;
-    public IDictionary<string,int> classDays;
     // public GameObject label;
 
     public void SetIndex(int x)
@@ -218,27 +217,27 @@ public class ScheduleHandler : MonoBehaviour
         for (int i = 0; i<classPartitions.Count;i++){
             ClassScheduleItem item = classPartitions[i];
             if(item.index == idx){
-                // Destroy(item.label);
+                // Destroy(item);
                 classPartitions.RemoveAt(i);
                 classCount--;
             }else{
-                if(item.index > idx){
-                    item.index -= 1;
-                }
+                // if(item.index > idx){
+                //     item.index -= 1;
+                // }
             }
         }
         for (int i = 0; i<classObjects.Count;i++){
             ClassObject classObj = classObjects[i];
             if(classObj.index == idx){
-                Destroy(classObj.label);
+                Destroy(classObjects[i].label);
                 classObjects.RemoveAt(i);
             }else{
-                if(classObj.index > idx){
-                    classObj.index -= 1;
-                }
+                // if(classObj.index > idx){
+                //     classObj.index -= 1;
+                // }
             }
         }
-        // SortClasses();
+        SortClasses();
     }
 
     public void BackCheck()
@@ -251,32 +250,54 @@ public class ScheduleHandler : MonoBehaviour
         SaveSchedule();
     }
 
-    public void Refresh()
+    public void DeleteAll()
     {
         for (int i = 0; i<classPartitions.Count;i++){
             ClassObject thisClass = classObjects[i];
-            ClassScheduleItem item = classPartitions[i];
-
-            GameObject templateCopy = thisClass.label;
-
-            Transform nameInput = templateCopy.transform.Find("ClassNameInput");
-            TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
-            name.text = item.className;
-
-            Transform startInput = templateCopy.transform.Find("StartInput");
-            TMP_InputField start = startInput.GetComponent<TMP_InputField>();
-            start.text = item.startTime;
-
-            Transform endInput = templateCopy.transform.Find("EndInput");
-            TMP_InputField end = endInput.GetComponent<TMP_InputField>();
-            end.text = item.endTime;
-
-            Transform roomInput = templateCopy.transform.Find("RoomInput");
-            TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
-            room.text = item.roomNumber; 
-
-            classObjects[i].SetLabel(templateCopy);
+            DeleteClassTemplate(i);
         }
+
+        classPartitions.Clear();
+        classObjects.Clear();
+        
+    }
+
+    public void Refresh()
+    {
+
+        // LoadSchedule();
+        // GameObject[] classObjArr = GameObject.FindGameObjectsWithTag("Class");
+        // List<GameObject> classObjs = new List<GameObject>();
+        // foreach(GameObject classO in classObjArr)
+        //     classObjs.Add(classO);
+        
+        // classObjs = classObjs.OrderBy(classObjs=> DateTime.Parse(classObjs.transform.Find("ClassNameInput").GetComponent<TMP_InputField>().text)).ToList();
+
+        // Debug.Log(classObjs.Count);
+        // for (int i = 0; i < classObjs.Count;i++){
+        //     ClassObject thisClass = classObjects[i];
+        //     ClassScheduleItem item = classPartitions[i];
+
+        //     GameObject templateCopy = thisClass.label;
+
+        //     Transform nameInput = templateCopy.transform.Find("ClassNameInput");
+        //     TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
+        //     name.text = item.className;
+
+        //     Transform startInput = templateCopy.transform.Find("StartInput");
+        //     TMP_InputField start = startInput.GetComponent<TMP_InputField>();
+        //     start.text = item.startTime;
+
+        //     Transform endInput = templateCopy.transform.Find("EndInput");
+        //     TMP_InputField end = endInput.GetComponent<TMP_InputField>();
+        //     end.text = item.endTime;
+
+        //     Transform roomInput = templateCopy.transform.Find("RoomInput");
+        //     TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
+        //     room.text = item.roomNumber; 
+
+        //     classObjs[i] = templateCopy;
+        // }
     }
 
     public void SaveAll(int idx, int editMode){
@@ -354,8 +375,11 @@ public class ScheduleHandler : MonoBehaviour
                 Debug.Log(classPartitions[idx].className);
                 Debug.Log(thisClass.valid);
                 if(thisClass.valid)
+                {
                     Debug.Log("valid class saved");
+                    
                     SaveSchedule();
+                }
                 break;
             }
         }
@@ -375,33 +399,32 @@ public class ScheduleHandler : MonoBehaviour
     }
 
     public void LoadSchedule() {
-        if(hasLoaded == 0)
+        DeleteAll();
+        Debug.Log("Loading schedule.");
+        string path = Application.persistentDataPath + "/schedule.bin";
+        if (File.Exists(path))
         {
-            Debug.Log("Loading schedule.");
-            string path = Application.persistentDataPath + "/schedule.bin";
-            if (File.Exists(path))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Open);
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
 
-                classPartitions = (List<ClassScheduleItem>) formatter.Deserialize(stream);
-                stream.Close();
+            classPartitions = (List<ClassScheduleItem>) formatter.Deserialize(stream);
+            stream.Close();
 
-                classCount = classPartitions.Count;
+            classCount = classPartitions.Count;
 
-                //Test
-                Debug.Log("Number of classes in the schedule: " + classCount);
-                for (int i = 0; i<classPartitions.Count;i++){
-                    ClassScheduleItem item = classPartitions[i];
-                    Debug.Log("Class name: " + item.className);
-                }
-
-                classObjects = new List<ClassObject>();
-                // Populate list of unity objects
-                PopulateObjects();
+            //Test
+            Debug.Log("Number of classes in the schedule: " + classCount);
+            for (int i = 0; i<classPartitions.Count;i++){
+                ClassScheduleItem item = classPartitions[i];
+                Debug.Log("Class name: " + item.className);
             }
-            hasLoaded++;
+
+            classObjects = new List<ClassObject>();
+            // Populate list of unity objects
+            PopulateObjects();
         }
+
+        
     }
 
     public void PopulateObjects() {
@@ -429,6 +452,8 @@ public class ScheduleHandler : MonoBehaviour
           name.text = item.className;
           // name.text = "Cybersecurity";
           name.onEndEdit.AddListener(delegate{SaveAll(item.index, 1);});
+
+
 
           Transform startInput = templateCopy.transform.Find("StartInput");
           TMP_InputField start = startInput.GetComponent<TMP_InputField>();
@@ -476,4 +501,5 @@ public class ScheduleHandler : MonoBehaviour
         }
         classObjects[index] = obj;
     }
+
 }
