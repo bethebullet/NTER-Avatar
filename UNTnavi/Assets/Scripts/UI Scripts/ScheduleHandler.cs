@@ -60,9 +60,11 @@ public class ScheduleHandler : MonoBehaviour
         LoadSchedule();
     }
     void Update(){}
+
     public void SortClasses(){
         //classes = classes.OrderBy(c=> c.startTime).ToList();
     } // sort classes by schedule start time and set their order index
+
     public void NewClassTemplate(){
         if(classCount >= MAX_CLASSES_ALLOWED){return;}//dont add any more if they have 8
         ClassScheduleItem item = new ClassScheduleItem();
@@ -85,20 +87,20 @@ public class ScheduleHandler : MonoBehaviour
 
         Transform nameInput = templateCopy.transform.Find("ClassNameInput");
         TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
-        name.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+        name.onEndEdit.AddListener(delegate{SaveAll(item.index, 1);});
 
         Transform startInput = templateCopy.transform.Find("StartInput");
         TMP_InputField start = startInput.GetComponent<TMP_InputField>();
-        start.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+        start.onEndEdit.AddListener(delegate{SaveAll(item.index, 2);});
 
         Transform endInput = templateCopy.transform.Find("EndInput");
         TMP_InputField end = endInput.GetComponent<TMP_InputField>();
-        end.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+        end.onEndEdit.AddListener(delegate{SaveAll(item.index, 3);});
 
         Transform roomInput = templateCopy.transform.Find("RoomInput");
         TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
         
-        room.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+        room.onEndEdit.AddListener(delegate{SaveAll(item.index, 4);});
         room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
         
         classCount++;
@@ -132,10 +134,19 @@ public class ScheduleHandler : MonoBehaviour
             }
         }
         SortClasses();
-        SaveSchedule();
     }
 
-    public void SaveAll(int idx){
+    public void BackCheck()
+    {
+        // for (int i = 0; i<classPartitions.Count;i++){
+        //     ClassObject thisClass = classObjects[i];
+        //     if(!thisClass.valid)
+        //         DeleteClassTemplate(i);
+        // }
+        // SaveSchedule();
+    }
+
+    public void SaveAll(int idx, int editMode){
         for (int i = 0; i<classPartitions.Count;i++){
             ClassObject thisClass = classObjects[idx];
             if(idx == i){ // && thisClass.valid == true
@@ -146,35 +157,59 @@ public class ScheduleHandler : MonoBehaviour
                 GameObject templateCopy = thisClass.label;
                 Transform nameInput = templateCopy.transform.Find("ClassNameInput");
                 TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
+                Outline outlineName = thisClass.label.transform.Find("ClassNameInput").GetComponent<Outline>();
+                if(editMode == 1)
+                {
+                    if (name.text != string.Empty)
+                    {
+                        outlineName.effectColor = new Color(0.0f,0.0f,0.0f,0.0f);
+                        thisClass.valid = true;
+                    }
+                    else
+                    {
+                        outlineName.effectColor = new Color(1.0f,0.0f,0.0f,1.0f);
+                        thisClass.valid = false;
+                    }
+                }
                 updatedClass.className = name.text;
 
                 Transform startInput = templateCopy.transform.Find("StartInput");
                 TMP_InputField start = startInput.GetComponent<TMP_InputField>();
-                if (DateTime.TryParse(start.text, out parsedTime))
+                Outline outlineStart = thisClass.label.transform.Find("StartInput").GetComponent<Outline>();
+                if(editMode == 2)
                 {
-                    start.text = parsedTime.ToString("h:mm tt");
-                    thisClass.valid = true;
-                }
-                else
-                {
-                    start.text = string.Empty;
-                    thisClass.valid = false;
-                    break;
+                    if (DateTime.TryParse(start.text, out parsedTime))
+                    {
+                        outlineStart.effectColor = new Color(0.0f,0.0f,0.0f,0.0f);
+                        start.text = parsedTime.ToString("h:mm tt");
+                        thisClass.valid = true;
+                    }
+                    else
+                    {
+                        outlineStart.effectColor = new Color(1.0f,0.0f,0.0f,1.0f);
+                        start.text = string.Empty;
+                        thisClass.valid = false;
+                    }
                 }
                 updatedClass.startTime = start.text;
 
                 Transform endInput = templateCopy.transform.Find("EndInput");
                 TMP_InputField end = endInput.GetComponent<TMP_InputField>();
-                if (DateTime.TryParse(end.text, out parsedTime))
+                Outline outlineEnd = thisClass.label.transform.Find("EndInput").GetComponent<Outline>();
+                if(editMode == 3)
                 {
-                    end.text = parsedTime.ToString("h:mm tt");
-                    thisClass.valid = true;
-                }
-                else
-                {
-                    end.text = string.Empty;
-                    thisClass.valid = false;
-                    break;
+                    if (DateTime.TryParse(end.text, out parsedTime))
+                    {
+                        outlineEnd.effectColor = new Color(0.0f,0.0f,0.0f,0.0f);
+                        end.text = parsedTime.ToString("h:mm tt");
+                        thisClass.valid = true;
+                    }
+                    else
+                    {
+                        outlineEnd.effectColor = new Color(1.0f,0.0f,0.0f,1.0f);
+                        end.text = string.Empty;
+                        thisClass.valid = false;
+                    }
                 }
                 updatedClass.endTime = end.text;
 
@@ -184,7 +219,10 @@ public class ScheduleHandler : MonoBehaviour
 
                 classPartitions[idx] = updatedClass;
                 Debug.Log(classPartitions[idx].className);
-                SaveSchedule();
+                Debug.Log(thisClass.valid);
+                if(thisClass.valid)
+                    Debug.Log("valid class saved");
+                    SaveSchedule();
                 break;
             }
         }
@@ -256,25 +294,25 @@ public class ScheduleHandler : MonoBehaviour
           TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
           name.text = item.className;
           // name.text = "Cybersecurity";
-          name.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+          name.onEndEdit.AddListener(delegate{SaveAll(item.index, 1);});
 
           Transform startInput = templateCopy.transform.Find("StartInput");
           TMP_InputField start = startInput.GetComponent<TMP_InputField>();
           start.text = item.startTime;
           // start.text = "9:30";
-          start.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+          start.onEndEdit.AddListener(delegate{SaveAll(item.index, 2);});
 
           Transform endInput = templateCopy.transform.Find("EndInput");
           TMP_InputField end = endInput.GetComponent<TMP_InputField>();
           end.text = item.endTime;
           // end.text = "10:50";
-          end.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+          end.onEndEdit.AddListener(delegate{SaveAll(item.index, 3);});
 
           Transform roomInput = templateCopy.transform.Find("RoomInput");
           TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
           room.text =  item.roomNumber;
           // room.text = "B190";
-          room.onEndEdit.AddListener(delegate{SaveAll(item.index);});
+          room.onEndEdit.AddListener(delegate{SaveAll(item.index, 4);});
           room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
       }
     }
@@ -290,7 +328,7 @@ public class ScheduleHandler : MonoBehaviour
             TextMeshProUGUI t = ele.transform.GetComponentInChildren<TextMeshProUGUI>(true);
             if(t != null){
                 if(input.ToLower() == t.text.ToLower()){
-                    outline.effectColor = new Color(0.0f,1.0f,0.0f,1.0f);
+                    outline.effectColor = new Color(0.0f,0.0f,0.0f,0.0f);
                     match = 1;
                     obj.valid = true;
                     break;
@@ -299,6 +337,7 @@ public class ScheduleHandler : MonoBehaviour
         }
         if (match == 0){
             outline.effectColor = new Color(1.0f,0.0f,0.0f,1.0f);
+            Debug.Log("why");
             obj.valid = false;
         }
     }

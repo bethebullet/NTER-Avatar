@@ -741,8 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a563af07965904980b747f7f903a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashscreen: {fileID: 1362307245}
-  Tutorial: {fileID: 2007958253}
+  splashscreen: {fileID: 2007958253}
 --- !u!1 &863045633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2007958254
 Transform:
   m_ObjectHideFlags: 0

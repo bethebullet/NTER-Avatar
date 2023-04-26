@@ -9,22 +9,17 @@ public class IntroSceneUI : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject splashscreen;
-    public GameObject Tutorial;
+    // public GameObject Tutorial;
 
     void Start()
     {
         StartCoroutine(SplashFade());
-        StartCoroutine(LoadScene());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
+
     IEnumerator SplashFade()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(4.0f);
         var color = splashscreen.GetComponent<CanvasGroup>();
         for (float x = 1; x > 0; x += -.05f)
         {
@@ -33,11 +28,11 @@ public class IntroSceneUI : MonoBehaviour
         }
         color.alpha = 0;
         splashscreen.SetActive(false);
-        Tutorial.SetActive(true);
+        StartCoroutine(LoadScene());
     }
     IEnumerator LoadScene()
     {
-        yield return new WaitForSeconds(8.0f);
+        yield return new WaitForSeconds(0.0f);
         SceneManager.LoadScene (sceneName:"Brandon Map");
     }
 }

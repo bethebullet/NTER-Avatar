@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 2744698292406156013}
   - component: {fileID: 2744698292406156012}
   - component: {fileID: 2744698292406156015}
+  - component: {fileID: 2706029978020548013}
   m_Layer: 5
   m_Name: StartInput
   m_TagString: Untagged
@@ -362,6 +363,21 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &2706029978020548013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2744698292406156009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2744698292423072321
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +871,7 @@ GameObject:
   - component: {fileID: 2744698292737945781}
   - component: {fileID: 2744698292737945780}
   - component: {fileID: 2744698292737945783}
+  - component: {fileID: 698676356232667605}
   m_Layer: 5
   m_Name: EndInput
   m_TagString: Untagged
@@ -1019,6 +1036,21 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &698676356232667605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2744698292737945777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2744698292918542755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,6 +2101,7 @@ GameObject:
   - component: {fileID: 2744698294241120711}
   - component: {fileID: 2744698294241120710}
   - component: {fileID: 2744698294241120705}
+  - component: {fileID: 9155779433751518826}
   m_Layer: 5
   m_Name: ClassNameInput
   m_TagString: Untagged
@@ -2233,6 +2266,21 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &9155779433751518826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2744698294241120707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7913667289743311983
 GameObject:
   m_ObjectHideFlags: 0
