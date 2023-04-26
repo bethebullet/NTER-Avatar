@@ -18,12 +18,27 @@ public struct ClassScheduleItem{ // Can be saved to a file
     public int index;
     public IDictionary<string,int> classDays;
     // public GameObject label;
+
+    public void SetIndex(int x)
+    {
+        index = x;
+    }
 }
 
 public struct ClassObject{ // Unity Object
     public int index;
     public GameObject label;
     public bool valid;
+
+    public void SetIndex(int x)
+    {
+        index = x;
+    }
+
+    public void SetLabel(GameObject x)
+    {
+        label = x;
+    }
 }
 
 public class ScheduleHandler : MonoBehaviour
@@ -36,7 +51,7 @@ public class ScheduleHandler : MonoBehaviour
     [SerializeField] private GameObject scheduleTemplate;
     [SerializeField] private Transform TemplateContainer;
     public List<ClassScheduleItem> classPartitions;
-    private List<ClassObject> classObjects;
+    public List<ClassObject> classObjects;
     private int MAX_CLASSES_ALLOWED = 8;
     private int classCount = 0;
     private int hasLoaded = 0;
@@ -58,6 +73,7 @@ public class ScheduleHandler : MonoBehaviour
         classObjects = new List<ClassObject>();
 
         LoadSchedule();
+        // BackCheck();
     }
 
     public void SortClasses(){
@@ -70,71 +86,86 @@ public class ScheduleHandler : MonoBehaviour
         int loopCount = 0;
         List<int> newClass = new List<int>();
         List<ClassScheduleItem> newClassPartitions = new List<ClassScheduleItem>();
+        List<ClassObject> newClassObjects = new List<ClassObject>();
         if (classPartitions.Count != 0)
         {
-        while (newListLength != classCount)
-        {
-            if (newClass.Count != 0)
+            while (newListLength != classCount)
             {
-                foreach (int j in newClass)
+                if (newClass.Count != 0)
                 {
-                    if ( i == j)
+                    foreach (int j in newClass)
                     {
-                         notUsed = false;
+                        if ( i == j)
+                        {
+                            notUsed = false;
+                        }
                     }
                 }
-            }
-            if (notUsed)
-            {
-
-                int hourTime = 0; 
-                int minuteTime = 0;
-                int tempTime = 100000;
-                int colon =  classPartitions[i].startTime.IndexOf(":");
-                int amPM = classPartitions[i].startTime.IndexOf("M") - 2;
-                bool success1 = int.TryParse(classPartitions[i].startTime.Substring(0, colon), out hourTime);
-                bool success2 = int.TryParse(classPartitions[i].startTime.Substring(colon+1, amPM - colon-1), out minuteTime);
-                if (success1 && success2)
+                if (notUsed)
                 {
-                    string tod = classPartitions[i].startTime.Substring(amPM+1, 2);
-                    if (tod.Equals("PM") && hourTime != 12)
-                    {
-                     minuteTime = minuteTime + 720;
-                    }
-                    if (tod.Equals("AM") && hourTime == 12)
-                    {    
-                    hourTime = 0;
-                    }
-                    hourTime = hourTime * 60;
-                    tempTime = hourTime + minuteTime;
 
-                    if (tempTime < minTime)
+                    int hourTime = 0; 
+                    int minuteTime = 0;
+                    int tempTime = 100000;
+                    int colon =  classPartitions[i].startTime.IndexOf(":");
+                    int amPM = classPartitions[i].startTime.IndexOf("M") - 2;
+                    bool success1 = int.TryParse(classPartitions[i].startTime.Substring(0, colon), out hourTime);
+                    bool success2 = int.TryParse(classPartitions[i].startTime.Substring(colon+1, amPM - colon-1), out minuteTime);
+                    if (success1 && success2)
                     {
-                        minTime = tempTime;
-                        minIndex = i;
+                        string tod = classPartitions[i].startTime.Substring(amPM+1, 2);
+                        if (tod.Equals("PM") && hourTime != 12)
+                        {
+                        minuteTime = minuteTime + 720;
+                        }
+                        if (tod.Equals("AM") && hourTime == 12)
+                        {    
+                        hourTime = 0;
+                        }
+                        hourTime = hourTime * 60;
+                        tempTime = hourTime + minuteTime;
+
+                        if (tempTime < minTime)
+                        {
+                            minTime = tempTime;
+                            minIndex = i;
+                        }
                     }
                 }
+                i++;
+                notUsed = true;
+                if (i == classCount)
+                {
+                    classPartitions[minIndex].SetIndex(newClassPartitions.Count);
+                    classObjects[minIndex].SetIndex(newClassObjects.Count);
+                    newClassPartitions.Add(classPartitions[minIndex]);
+                    newClassObjects.Add(classObjects[minIndex]);
+                    newClass.Add(minIndex);
+                    i = 0;
+                    loopCount++;
+                    newListLength++;
+                    Debug.Log(minIndex);
+                    minIndex = 10000;
+                    minTime = 1000000;
+                }
             }
-            i++;
-            notUsed = true;
-            if (i == classCount)
+            i = 0;
+            foreach(ClassScheduleItem item in newClassPartitions)
             {
-                newClassPartitions.Add(classPartitions[minIndex]);
-                newClass.Add(minIndex);
-                i = 0;
-                loopCount++;
-                newListLength++;
-                Debug.Log(minIndex);
-                minIndex = 10000;
-                minTime = 1000000;
+                classPartitions[i] = item;
+                i++;
             }
-        }
-        i = 0;
-        foreach(ClassScheduleItem item in newClassPartitions)
-        {
-            classPartitions[i] = item;
-            i++;
-        }
+            i = 0;
+            foreach(ClassObject item in newClassObjects)
+            {
+                classObjects[i] = item;
+                i++;
+            }
+            for (int j = 0; j < classPartitions.Count; j++)
+            {
+                SaveAll(j, 0);
+            }
+            Refresh();
         }
     } // sort classes by schedule start time and set their order index
 
@@ -150,6 +181,7 @@ public class ScheduleHandler : MonoBehaviour
         item.index = classCount;
         classObj.index = classCount;
         classObj.label = templateCopy;
+        classObj.valid = false;
 
         classPartitions.Add(item);
         classObjects.Add(classObj);
@@ -206,17 +238,45 @@ public class ScheduleHandler : MonoBehaviour
                 }
             }
         }
-        //SortClasses();
+        // SortClasses();
     }
 
     public void BackCheck()
     {
-        // for (int i = 0; i<classPartitions.Count;i++){
-        //     ClassObject thisClass = classObjects[i];
-        //     if(!thisClass.valid)
-        //         DeleteClassTemplate(i);
-        // }
-        // SaveSchedule();
+        for (int i = 0; i<classPartitions.Count;i++){
+            ClassObject thisClass = classObjects[i];
+            if(!thisClass.valid)
+                DeleteClassTemplate(i);
+        }
+        SaveSchedule();
+    }
+
+    public void Refresh()
+    {
+        for (int i = 0; i<classPartitions.Count;i++){
+            ClassObject thisClass = classObjects[i];
+            ClassScheduleItem item = classPartitions[i];
+
+            GameObject templateCopy = thisClass.label;
+
+            Transform nameInput = templateCopy.transform.Find("ClassNameInput");
+            TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
+            name.text = item.className;
+
+            Transform startInput = templateCopy.transform.Find("StartInput");
+            TMP_InputField start = startInput.GetComponent<TMP_InputField>();
+            start.text = item.startTime;
+
+            Transform endInput = templateCopy.transform.Find("EndInput");
+            TMP_InputField end = endInput.GetComponent<TMP_InputField>();
+            end.text = item.endTime;
+
+            Transform roomInput = templateCopy.transform.Find("RoomInput");
+            TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
+            room.text = item.roomNumber; 
+
+            classObjects[i].SetLabel(templateCopy);
+        }
     }
 
     public void SaveAll(int idx, int editMode){
@@ -355,6 +415,7 @@ public class ScheduleHandler : MonoBehaviour
 
           classObj.index = item.index;
           classObj.label = templateCopy;
+          classObj.valid = true;
           classObjects.Add(classObj);
 
           // Debug.Log(item.className);
@@ -385,7 +446,7 @@ public class ScheduleHandler : MonoBehaviour
           TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
           room.text =  item.roomNumber;
           // room.text = "B190";
-          room.onEndEdit.AddListener(delegate{SaveAll(item.index, 4);});
+          room.onEndEdit.AddListener(delegate{SearchRoom(item.index,room.text); SaveAll(item.index, 4);});
           room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
       }
     }
@@ -413,5 +474,6 @@ public class ScheduleHandler : MonoBehaviour
             Debug.Log("why");
             obj.valid = false;
         }
+        classObjects[index] = obj;
     }
 }
