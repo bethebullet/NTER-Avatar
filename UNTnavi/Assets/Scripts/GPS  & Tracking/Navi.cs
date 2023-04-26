@@ -54,11 +54,17 @@ public class Navi : MonoBehaviour
         // }
         if (!moving)
         {
+            travelDist = 15;
             distSum = Vector3.Distance(pm.myLocation, pm.path.vectorPath[pm.currentWP]);
             pastMid = false;
+            int startingWP = pm.currentWP;
             for (int i = pm.currentWP; i < pm.path.vectorPath.Count - 1; i++)
             {
                 distSum += Vector3.Distance(pm.path.vectorPath[i], pm.path.vectorPath[i + 1]);
+                if(travelDist > Vector3.Distance(pm.path.vectorPath[startingWP], pm.path.vectorPath[pm.path.vectorPath.Count -1]))
+                {
+                    travelDist = Vector3.Distance(pm.path.vectorPath[startingWP], pm.path.vectorPath[pm.path.vectorPath.Count -1]) -.5f;
+                }
                 if(distSum > travelDist/2 && !pastMid)
                 {
                     middle = pm.path.vectorPath[i] + new Vector3 (0,1,0);
@@ -110,6 +116,10 @@ public class Navi : MonoBehaviour
             timer += Time.deltaTime;
             i++;
             yield return new WaitForSeconds(.01f);
+            if(pm.path == null)
+            {
+                break;
+            }
             // Debug.Log(Vector3.Distance(transform.position, middle));
         }
         // Debug.Log("Middle");
@@ -125,6 +135,10 @@ public class Navi : MonoBehaviour
             timer += Time.deltaTime;
             i++;
             yield return new WaitForSeconds(.01f);
+            if(pm.path == null)
+            {
+                break;
+            }
         }
         
         yield return new WaitForSeconds(.5f);

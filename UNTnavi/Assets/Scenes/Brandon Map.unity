@@ -7799,7 +7799,7 @@ GameObject:
   - component: {fileID: 1546586758}
   - component: {fileID: 1546586759}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: MapSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10865,11 +10865,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seeker: {fileID: 0}
+  marker: {fileID: 0}
+  markerObj: {fileID: 1227385938630499833, guid: 56c7e93cdd66e0d4e88f7118411a210f,
+    type: 3}
   navi: {fileID: 1510606412}
   currentWP: 0
   distWP: 0
   totalDist: 0
   distLeft: 0
+  destDist: 0
   myLocation: {x: 0, y: 0, z: 0}
   target: {x: 0, y: 0, z: 0}
 --- !u!114 &2057643294

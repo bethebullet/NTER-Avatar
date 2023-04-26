@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,8 @@ public class ScheduleHandler : MonoBehaviour
     private int classCount = 0;
     private int hasLoaded = 0;
 
+    private DateTime parsedTime;
+
     void Start(){
         /*float width = container.sizeDelta.x;
         float height = container.sizeDelta.y;
@@ -53,6 +56,8 @@ public class ScheduleHandler : MonoBehaviour
         // Debug.Log(File.Exists(Application.persistentDataPath + "/schedule.bin"));
         classPartitions = new List<ClassScheduleItem>();
         classObjects = new List<ClassObject>();
+
+        LoadSchedule();
     }
     void Update(){}
     public void SortClasses(){
@@ -145,10 +150,32 @@ public class ScheduleHandler : MonoBehaviour
 
                 Transform startInput = templateCopy.transform.Find("StartInput");
                 TMP_InputField start = startInput.GetComponent<TMP_InputField>();
+                if (DateTime.TryParse(start.text, out parsedTime))
+                {
+                    start.text = parsedTime.ToString("h:mm tt");
+                    thisClass.valid = true;
+                }
+                else
+                {
+                    start.text = string.Empty;
+                    thisClass.valid = false;
+                    break;
+                }
                 updatedClass.startTime = start.text;
 
                 Transform endInput = templateCopy.transform.Find("EndInput");
                 TMP_InputField end = endInput.GetComponent<TMP_InputField>();
+                if (DateTime.TryParse(end.text, out parsedTime))
+                {
+                    end.text = parsedTime.ToString("h:mm tt");
+                    thisClass.valid = true;
+                }
+                else
+                {
+                    end.text = string.Empty;
+                    thisClass.valid = false;
+                    break;
+                }
                 updatedClass.endTime = end.text;
 
                 Transform roomInput = templateCopy.transform.Find("RoomInput");
@@ -265,14 +292,14 @@ public class ScheduleHandler : MonoBehaviour
                 if(input.ToLower() == t.text.ToLower()){
                     outline.effectColor = new Color(0.0f,1.0f,0.0f,1.0f);
                     match = 1;
-                    //obj.valid = true;
+                    obj.valid = true;
                     break;
                 }
             }
         }
         if (match == 0){
             outline.effectColor = new Color(1.0f,0.0f,0.0f,1.0f);
-            //obj.valid = false;
+            obj.valid = false;
         }
     }
 }

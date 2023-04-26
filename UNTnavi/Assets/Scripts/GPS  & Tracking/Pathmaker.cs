@@ -7,6 +7,9 @@ public class Pathmaker : MonoBehaviour
 {
     public Path path;
     public Seeker seeker;
+
+    public GameObject marker;
+    public GameObject markerObj;
     
     public Navi navi;
 
@@ -14,6 +17,8 @@ public class Pathmaker : MonoBehaviour
     public float distWP;
     public float totalDist;
     public float distLeft;
+
+    public float destDist;
 
     public Vector3 myLocation;
     public Vector3 target;
@@ -37,10 +42,11 @@ public class Pathmaker : MonoBehaviour
             return;
 
 
+
         distWP = Vector3.Distance(myLocation, path.vectorPath[currentWP]);
         CheckPathProgress();
 
-        if (distWP < .75f && currentWP < path.vectorPath.Count)
+        if (distWP < 3 && currentWP < path.vectorPath.Count)
             currentWP++;
 
         float sum = 0;
@@ -60,7 +66,13 @@ public class Pathmaker : MonoBehaviour
         // Debug.Log(path.vectorPath.Count);
         // Debug.Log(currentWP);
 
-
+        destDist = Vector3.Distance(myLocation, target);
+        Debug.Log(destDist);
+        if (destDist < 3)
+        {
+            marker.GetComponent<MarkerSpawn>().DestroyMarker();    
+            path = null;
+        }
     }
 
     // checks to see if the user has passed a waypoint
@@ -104,6 +116,11 @@ public class Pathmaker : MonoBehaviour
     public void FindTarget(GameObject room)
     {
         target = room.transform.position;
+        destDist = 10;
+        if (marker != null)
+            marker.Destroy();
+        marker = Instantiate(markerObj, target, Quaternion.identity);
+        marker.GetComponent<MarkerSpawn>().location = target;
         // Debug.Log(room.transform.position);
         UpdatePath();
     }
