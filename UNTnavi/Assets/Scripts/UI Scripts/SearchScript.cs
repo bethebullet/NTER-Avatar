@@ -8,6 +8,7 @@ public class SearchScript : MonoBehaviour
 {
     public UI_Script uiScript;
     public List<GameObject> Element;
+    public List<GameObject> elementKid;
     public GameObject SearchBar;
     public int totalElements;
     public GameObject maps;
@@ -40,6 +41,7 @@ public class SearchScript : MonoBehaviour
 
         //use the door list from roomList.cs
         Element = lists.doors;
+        elementKid = lists.doors;
 
         //put the elements into the content child of SearchContent
         //each element should be its own object so that the names can be viewed

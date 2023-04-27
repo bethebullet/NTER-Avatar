@@ -11,17 +11,20 @@ public class OnClickScript : MonoBehaviour
     public SearchScript search;
     public ScheduleHandler sh;
     public Clock c;
+    public GameObject inceptionRoom; 
 
     public void roomClick()
     {
+        //Debug.Log(" Room: " + room.transform.position);
         pm.FindTarget(room);
         ui.updateMenu(0);
     }
 
-    public void TrackClick()
+    public void TrackClick() // track button on main screen
     {
-        FindRoomString(search.lists.doors);
-        pm.FindTarget(room);
+        GameObject tempRoom = FindRoomString(search.elementKid);
+        Debug.Log(" Room: " + tempRoom.transform.position);
+        pm.FindTarget(tempRoom);
     }
 
     public void StairClick()
@@ -43,13 +46,14 @@ public class OnClickScript : MonoBehaviour
 
     GameObject FindRoomString(List<GameObject> rooms)
     {
-        room = rooms[0];
+
         for(int i = 0; i < rooms.Count; i++)
         {
+            room = rooms[i];
             if(string.Equals(rooms[i].name, c.nextClass.roomNumber, StringComparison.OrdinalIgnoreCase))
-                room = rooms[i];
+                inceptionRoom = rooms[i].GetComponent<OnClickScript>().room;
         }
-        return room;
+        return inceptionRoom;
     }
 
     GameObject FindClosestPlace(List<GameObject> places)
