@@ -164,6 +164,7 @@ public class ScheduleHandler : MonoBehaviour
             {
                 SaveAll(j, 0);
             }
+            
             Refresh();
         }
     } // sort classes by schedule start time and set their order index
@@ -221,9 +222,9 @@ public class ScheduleHandler : MonoBehaviour
                 classPartitions.RemoveAt(i);
                 classCount--;
             }else{
-                // if(item.index > idx){
-                //     item.index -= 1;
-                // }
+                if(item.index > idx){
+                    item.index -= 1;
+                }
             }
         }
         for (int i = 0; i<classObjects.Count;i++){
@@ -232,12 +233,12 @@ public class ScheduleHandler : MonoBehaviour
                 Destroy(classObjects[i].label);
                 classObjects.RemoveAt(i);
             }else{
-                // if(classObj.index > idx){
-                //     classObj.index -= 1;
-                // }
+                if(classObj.index > idx){
+                    classObjects[i].SetIndex(classObjects[i].index - 1);
+                }
             }
         }
-        SortClasses();
+        //SortClasses();
     }
 
     public void BackCheck()
@@ -247,25 +248,30 @@ public class ScheduleHandler : MonoBehaviour
             if(!thisClass.valid)
                 DeleteClassTemplate(i);
         }
-        SaveSchedule();
+        for (int j = 0; j < classPartitions.Count; j++)
+        {
+            SaveAll(j, 0);
+        }
+
+
+        SortClasses();
     }
 
     public void DeleteAll()
     {
-        for (int i = 0; i<classPartitions.Count;i++){
-            ClassObject thisClass = classObjects[i];
-            DeleteClassTemplate(i);
+        int tempClasses = classPartitions.Count;
+        for (int i = 0; i < tempClasses; i++){
+            Destroy(classObjects[i].label);
         }
 
         classPartitions.Clear();
         classObjects.Clear();
-        
     }
 
     public void Refresh()
     {
 
-        // LoadSchedule();
+        LoadSchedule();
         // GameObject[] classObjArr = GameObject.FindGameObjectsWithTag("Class");
         // List<GameObject> classObjs = new List<GameObject>();
         // foreach(GameObject classO in classObjArr)
@@ -428,52 +434,52 @@ public class ScheduleHandler : MonoBehaviour
     }
 
     public void PopulateObjects() {
-      for (int i = 0; i<classPartitions.Count;i++){
-          ClassScheduleItem item = classPartitions[i];
-          ClassObject classObj = new ClassObject();
-          var templateCopy = Instantiate(scheduleTemplate);
-          RectTransform rt = templateCopy.GetComponent<RectTransform>();
-          templateCopy.transform.SetParent(TemplateContainer,false);
-          rt.localScale = new Vector3(1,1,1);
+        for (int i = 0; i<classPartitions.Count;i++){
+            ClassScheduleItem item = classPartitions[i];
+            ClassObject classObj = new ClassObject();
+            var templateCopy = Instantiate(scheduleTemplate);
+            RectTransform rt = templateCopy.GetComponent<RectTransform>();
+            templateCopy.transform.SetParent(TemplateContainer,false);
+            rt.localScale = new Vector3(1,1,1);
 
-          classObj.index = item.index;
-          classObj.label = templateCopy;
-          classObj.valid = true;
-          classObjects.Add(classObj);
+            classObj.index = item.index;
+            classObj.label = templateCopy;
+            classObj.valid = true;
+            classObjects.Add(classObj);
 
-          // Debug.Log(item.className);
+            // Debug.Log(item.className);
 
-          Transform deleteButton = templateCopy.transform.Find("DeleteButton");
-          Button btn = deleteButton.GetComponent<Button>();
-          btn.onClick.AddListener(delegate{DeleteClassTemplate(item.index);});
+            Transform deleteButton = templateCopy.transform.Find("DeleteButton");
+            Button btn = deleteButton.GetComponent<Button>();
+            btn.onClick.AddListener(delegate{DeleteClassTemplate(item.index);});
 
-          Transform nameInput = templateCopy.transform.Find("ClassNameInput");
-          TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
-          name.text = item.className;
-          // name.text = "Cybersecurity";
-          name.onEndEdit.AddListener(delegate{SaveAll(item.index, 1);});
+            Transform nameInput = templateCopy.transform.Find("ClassNameInput");
+            TMP_InputField name = nameInput.GetComponent<TMP_InputField>();
+            name.text = item.className;
+            // name.text = "Cybersecurity";
+            name.onEndEdit.AddListener(delegate{SaveAll(item.index, 1);});
 
 
 
-          Transform startInput = templateCopy.transform.Find("StartInput");
-          TMP_InputField start = startInput.GetComponent<TMP_InputField>();
-          start.text = item.startTime;
-          // start.text = "9:30";
-          start.onEndEdit.AddListener(delegate{SaveAll(item.index, 2);});
+            Transform startInput = templateCopy.transform.Find("StartInput");
+            TMP_InputField start = startInput.GetComponent<TMP_InputField>();
+            start.text = item.startTime;
+            // start.text = "9:30";
+            start.onEndEdit.AddListener(delegate{SaveAll(item.index, 2);});
 
-          Transform endInput = templateCopy.transform.Find("EndInput");
-          TMP_InputField end = endInput.GetComponent<TMP_InputField>();
-          end.text = item.endTime;
-          // end.text = "10:50";
-          end.onEndEdit.AddListener(delegate{SaveAll(item.index, 3);});
+            Transform endInput = templateCopy.transform.Find("EndInput");
+            TMP_InputField end = endInput.GetComponent<TMP_InputField>();
+            end.text = item.endTime;
+            // end.text = "10:50";
+            end.onEndEdit.AddListener(delegate{SaveAll(item.index, 3);});
 
-          Transform roomInput = templateCopy.transform.Find("RoomInput");
-          TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
-          room.text =  item.roomNumber;
-          // room.text = "B190";
-          room.onEndEdit.AddListener(delegate{SearchRoom(item.index,room.text); SaveAll(item.index, 4);});
-          room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
-      }
+            Transform roomInput = templateCopy.transform.Find("RoomInput");
+            TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
+            room.text =  item.roomNumber;
+            // room.text = "B190";
+            room.onEndEdit.AddListener(delegate{SearchRoom(item.index,room.text); SaveAll(item.index, 4);});
+            room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
+        }
     }
 
 

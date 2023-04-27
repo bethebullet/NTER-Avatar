@@ -12,6 +12,7 @@ TagManager:
   - Stairs
   - Pathfinder
   - UI
+  - Class
   layers:
   - Default
   - TransparentFX
