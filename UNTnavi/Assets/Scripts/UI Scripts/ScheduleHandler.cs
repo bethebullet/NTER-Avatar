@@ -102,7 +102,7 @@ public class ScheduleHandler : MonoBehaviour
                 }
                 if (notUsed)
                 {
-
+                    
                     int hourTime = 0; 
                     int minuteTime = 0;
                     int tempTime = 100000;
@@ -164,10 +164,73 @@ public class ScheduleHandler : MonoBehaviour
             {
                 SaveAll(j, 0);
             }
+        }
+    } // sort classes by schedule start time and set their order index
+    public void sortByDays()
+    {
+        // go through each day
+        // if not on new lists add
+        // at end of the week, recombine and refresh
+
+        List<int> newClass = new List<int>();
+        List<ClassScheduleItem> newClassPartitions = new List<ClassScheduleItem>();
+        List<ClassObject> newClassObjects = new List<ClassObject>();
+
+        if (classPartitions.Count != 0)
+        {
+            for (int i =0; i < 6; i++)
+            {
+                for(int j = 0; j < classPartitions.Count; j++)
+                {
+                    if (classPartitions[j].weekDays[i])
+                    {
+                        if (notUsed(newClass, j))
+                        {
+                            classPartitions[j].SetIndex(newClassPartitions.Count);
+                            classObjects[j].SetIndex(newClassObjects.Count);
+                            newClassPartitions.Add(classPartitions[j]);
+                            newClassObjects.Add(classObjects[j]);
+                            newClass.Add(j);
+                        }
+                    }
+                }
+            }
+            int k = 0;
+            foreach(ClassScheduleItem item in newClassPartitions)
+            {
+                classPartitions[k] = item;
+                k++;
+            }
+            k = 0;
+            foreach(ClassObject item in newClassObjects)
+            {
+                classObjects[k] = item;
+                k++;
+            }
+            for (int j = 0; j < classPartitions.Count; j++)
+            {
+                SaveAll(j, 0);
+            }
             
             Refresh();
         }
-    } // sort classes by schedule start time and set their order index
+    }
+    bool notUsed(List<int> newClass, int idx)
+    {
+        bool notUsed = true;
+
+        if (newClass.Count != 0)
+        {
+            foreach (int j in newClass)
+            {
+                if ( idx == j)
+                {
+                    notUsed = false;
+                }
+            }
+        }
+        return notUsed;
+    }
 
     public void NewClassTemplate(){
         if(classCount >= MAX_CLASSES_ALLOWED){return;}//dont add any more if they have 8
@@ -270,6 +333,7 @@ public class ScheduleHandler : MonoBehaviour
         if (classPartitions.Count == 0)
             SaveSchedule();
         SortClasses();
+        sortByDays();
     }
 
     public void DeleteAll()
