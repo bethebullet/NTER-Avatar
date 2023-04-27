@@ -67,7 +67,6 @@ public class Pathmaker : MonoBehaviour
         // Debug.Log(currentWP);
 
         destDist = Vector3.Distance(myLocation, target);
-        Debug.Log(destDist);
         if (destDist < 3)
         {
             marker.GetComponent<MarkerSpawn>().DestroyMarker();    

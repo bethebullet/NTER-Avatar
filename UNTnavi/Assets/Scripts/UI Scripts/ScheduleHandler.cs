@@ -16,7 +16,7 @@ public struct ClassScheduleItem{ // Can be saved to a file
     public string endTime;
     public string className;
     public int index;
-    // public GameObject label;
+    public List<bool> weekDays;
 
     public void SetIndex(int x)
     {
@@ -179,9 +179,13 @@ public class ScheduleHandler : MonoBehaviour
         rt.localScale = new Vector3(1,1,1);
 
         item.index = classCount;
+        item.weekDays = new List<bool>();
+        for (int i = 0; i < 6; i++)
+            item.weekDays.Add(false);
         classObj.index = classCount;
         classObj.label = templateCopy;
         classObj.valid = false;
+
 
         classPartitions.Add(item);
         classObjects.Add(classObj);
@@ -207,7 +211,18 @@ public class ScheduleHandler : MonoBehaviour
         
         room.onEndEdit.AddListener(delegate{SaveAll(item.index, 4);});
         room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
-        
+
+
+        Toggle[] weekTog = new Toggle[6]; 
+        weekTog[0] = templateCopy.transform.Find("Mtoggle").GetComponent<Toggle>();
+        weekTog[1] = templateCopy.transform.Find("Ttoggle").GetComponent<Toggle>();
+        weekTog[2] = templateCopy.transform.Find("Wtoggle").GetComponent<Toggle>();
+        weekTog[3] = templateCopy.transform.Find("Thtoggle").GetComponent<Toggle>();
+        weekTog[4] = templateCopy.transform.Find("Ftoggle").GetComponent<Toggle>();
+        weekTog[5] = templateCopy.transform.Find("Stoggle").GetComponent<Toggle>();
+        for(int j = 0; j < weekTog.Length; j++)
+            weekTog[j].onValueChanged.AddListener(delegate{SaveAll(item.index, 0);}); 
+
         classCount++;
     }
     public void DeleteClassTemplate(int idx){
@@ -252,8 +267,8 @@ public class ScheduleHandler : MonoBehaviour
         {
             SaveAll(j, 0);
         }
-
-
+        if (classPartitions.Count == 0)
+            SaveSchedule();
         SortClasses();
     }
 
@@ -313,6 +328,9 @@ public class ScheduleHandler : MonoBehaviour
                 ClassScheduleItem item = classPartitions[idx];
                 ClassScheduleItem updatedClass = new ClassScheduleItem();
                 updatedClass.index = idx;
+                updatedClass.weekDays = new List<bool>();
+                for (int j = 0; j < 6; j++)
+                    updatedClass.weekDays.Add(false);
                 
                 GameObject templateCopy = thisClass.label;
                 Transform nameInput = templateCopy.transform.Find("ClassNameInput");
@@ -377,6 +395,19 @@ public class ScheduleHandler : MonoBehaviour
                 TMP_InputField room = roomInput.GetComponent<TMP_InputField>();
                 updatedClass.roomNumber = room.text;
 
+                Toggle[] weekTog = new Toggle[6]; 
+                weekTog[0] = templateCopy.transform.Find("Mtoggle").GetComponent<Toggle>();
+                weekTog[1] = templateCopy.transform.Find("Ttoggle").GetComponent<Toggle>();
+                weekTog[2] = templateCopy.transform.Find("Wtoggle").GetComponent<Toggle>();
+                weekTog[3] = templateCopy.transform.Find("Thtoggle").GetComponent<Toggle>();
+                weekTog[4] = templateCopy.transform.Find("Ftoggle").GetComponent<Toggle>();
+                weekTog[5] = templateCopy.transform.Find("Stoggle").GetComponent<Toggle>();
+
+                for(int j = 0; j < weekTog.Length; j++)
+                {
+                    updatedClass.weekDays[j] = weekTog[j].isOn;
+                }
+
                 classPartitions[idx] = updatedClass;
                 Debug.Log(classPartitions[idx].className);
                 Debug.Log(thisClass.valid);
@@ -415,6 +446,13 @@ public class ScheduleHandler : MonoBehaviour
 
             classPartitions = (List<ClassScheduleItem>) formatter.Deserialize(stream);
             stream.Close();
+
+            foreach(ClassScheduleItem tClass in classPartitions)
+                if(tClass.weekDays == null){
+                    Debug.Log("Old schedule obselete. Create new classes.");
+                    classPartitions.Clear();
+                    break;
+                }
 
             classCount = classPartitions.Count;
 
@@ -459,8 +497,6 @@ public class ScheduleHandler : MonoBehaviour
             // name.text = "Cybersecurity";
             name.onEndEdit.AddListener(delegate{SaveAll(item.index, 1);});
 
-
-
             Transform startInput = templateCopy.transform.Find("StartInput");
             TMP_InputField start = startInput.GetComponent<TMP_InputField>();
             start.text = item.startTime;
@@ -479,6 +515,20 @@ public class ScheduleHandler : MonoBehaviour
             // room.text = "B190";
             room.onEndEdit.AddListener(delegate{SearchRoom(item.index,room.text); SaveAll(item.index, 4);});
             room.onValueChanged.AddListener(delegate{SearchRoom(item.index,room.text);});
+
+            Toggle[] weekTog = new Toggle[6]; 
+            weekTog[0] = templateCopy.transform.Find("Mtoggle").GetComponent<Toggle>();
+            weekTog[1] = templateCopy.transform.Find("Ttoggle").GetComponent<Toggle>();
+            weekTog[2] = templateCopy.transform.Find("Wtoggle").GetComponent<Toggle>();
+            weekTog[3] = templateCopy.transform.Find("Thtoggle").GetComponent<Toggle>();
+            weekTog[4] = templateCopy.transform.Find("Ftoggle").GetComponent<Toggle>();
+            weekTog[5] = templateCopy.transform.Find("Stoggle").GetComponent<Toggle>();
+
+            for(int j = 0; j < weekTog.Length; j++)
+            {
+                weekTog[j].isOn = item.weekDays[j];
+                weekTog[j].onValueChanged.AddListener(delegate{SaveAll(item.index, 0);});
+            }
         }
     }
 
