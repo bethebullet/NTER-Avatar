@@ -35,11 +35,17 @@ public class Clock : MonoBehaviour
 
             DateTime classtime = DateTime.Parse(nextClass.startTime);
             DateTime minutes = DateTime.Now;
-            if (classtime.Subtract(minutes).TotalMinutes < 60)
-                timeTxt.text = "Next Class (in " + timeLeft + " min)\n";
-            else
-                timeTxt.text = "Next Class (in " + timeLeft + " hours)\n";
 
+            if (CheckInClass(nextClass))
+            {
+                timeTxt.text = "Class in Session\n";
+            } else 
+            {
+                if (classtime.Subtract(minutes).TotalMinutes < 60)
+                    timeTxt.text = "Next Class (in " + timeLeft + " min)\n";
+                else
+                    timeTxt.text = "Next Class (in " + timeLeft + " hours)\n";
+            }
             timeTxt.text += "> " + nextClass.className + " in " + nextClass.roomNumber;
         } else
         {
@@ -58,13 +64,48 @@ public class Clock : MonoBehaviour
 
     }
 
+
+    bool CheckInClass(ClassScheduleItem tClass)
+    {
+        DateTime minutes = DateTime.Now;
+        DateTime classtime = DateTime.Parse(tClass.startTime);
+        DateTime endtime = DateTime.Parse(tClass.endTime);
+        double start = classtime.Subtract(minutes).TotalMinutes;
+        double end = endtime.Subtract(minutes).TotalMinutes;
+
+        if (start < 0 && end > 0)
+            return true;
+        else
+            return false;    
+    }
+
+    public int GetDayofWeek()
+    {
+        DateTime today= DateTime.Now;
+        if(today.DayOfWeek.ToString() == "Monday")
+            return 0;
+        if(today.DayOfWeek.ToString() == "Tuesday")
+            return 1;
+        if(today.DayOfWeek.ToString() == "Wednesday")
+            return 2;
+        if(today.DayOfWeek.ToString() == "Thursday")
+            return 3;
+        if(today.DayOfWeek.ToString() == "Friday")
+            return 4;
+        if(today.DayOfWeek.ToString() == "Saturday")
+            return 5;
+        return -1;
+    }
+
     bool CheckClassToday()
     {
         for(int i = 0; i < sHandler.classPartitions.Count; i++)
         {
             var tClass = sHandler.classPartitions[i];
-            // if () date
-                if (GetTimeLeft(tClass) > 0)
+            if(GetDayofWeek() < 0)
+                return false;
+            if (tClass.weekDays[GetDayofWeek()])
+                if (GetTimeLeft(tClass) > 0 || CheckInClass(tClass))
                             return true;
         }
         return false;
@@ -77,8 +118,10 @@ public class Clock : MonoBehaviour
         for(int i = 0; i < sHandler.classPartitions.Count; i++)
         {
             nClass = sHandler.classPartitions[i];
-            //if() date
-                if(GetTimeLeft(nClass) < 0)
+            if(GetDayofWeek() < 0)
+                return nClass;
+            if (nClass.weekDays[GetDayofWeek()])
+                if(GetTimeLeft(nClass) < 0 || CheckInClass(nClass))
                     continue;
                 else
                     break;
